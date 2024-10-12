@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Potions/potions.css" media="screen">
+    <title>Potion and Ingredient Lookup</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }        
+    </style>
+
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="sidenav">
+            <a href="/index.html">Main Page</a>           
+            <a href="/Ports/ports.html">Ports Calc</a>
+            <a href="/Collection_Logs/Collection Logs.html">Collection Logs</a>
+        </div>
+
+        <div class="search">
+            <h1>Potion and Ingredient Lookup</h1>
+            <select id="searchType">
+                <option value="potion">Search by Potion Name</option>
+                <option value="ingredient">Search by Ingredient</option>
+            </select>
+            <input type="text" id="searchInput" placeholder="Enter potion name or ingredient...">
+        </div>
+
+        <div class="content">
+            <div id="result"></div>
+        </div>
+    </div>
+  
+
+    <script>
+        const potions = {
+  "Attack potion (3)": {
+    "level": 1,
+    "effect": "Temporarily boosts Attack by 8% plus 1.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Eye of newt"
+    ]
+  },
+  "Attack potion (4)": {
+    "level": 1,
+    "effect": "Temporarily boosts Attack by 8% plus 1.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Eye of newt"
+    ]
+  },
+  "Ranging potion (3)": {
+    "level": 3,
+    "effect": "Temporarily boosts Ranged by 8% plus 1.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Redberries"
+    ]
+  },
+  "Ranging potion (4)": {
+    "level": 3,
+    "effect": "Temporarily boosts Ranged by 8% plus 1.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Redberries"
+    ]
+  },
+  "Magic potion (3)": {
+    "level": 5,
+    "effect": "Temporarily boosts Magic by 8% plus 1.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Any coloured bead"
+    ]
+  },
+  "Magic potion (4)": {
+    "level": 5,
+    "effect": "Temporarily boosts Magic by 8% plus 1.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Any coloured bead"
+    ]
+  },
+  "Strength potion (3)": {
+    "level": 7,
+    "effect": "Temporarily boosts Strength by 8% plus 1.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Limpwurt root",
+      "While this is non-members, it cannot be mixed by F2P.Free players can instead obtain this potion through the Apothecary, requiring Red spiders' eggs, a Limpwurt Root and 5 coins for each potion (produces 4 doses instead of 3)."
+    ]
+  },
+  "Strength potion (4)": {
+    "level": 7,
+    "effect": "Temporarily boosts Strength by 8% plus 1.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Limpwurt root",
+      "While this is non-members, it cannot be mixed by F2P.Free players can instead obtain this potion through the Apothecary, requiring Red spiders' eggs, a Limpwurt Root and 5 coins for each potion (produces 4 doses instead of 3)."
+    ]
+  },
+  "Relicym's balm": {
+    "level": 8,
+    "effect": "Preferred weapon to use against Orange Broodoo Victims during the Tai Bwo Wannai Cleanup minigame.",
+    "ingredients": [
+      "Rogue's purse potion (unf)",
+      "Clean snake weed",
+      "Must have at least started Zogre Flesh Eaters."
+    ]
+  },
+  "Defence potion (3)": {
+    "level": 9,
+    "effect": "Temporarily raises Defence level by 8% plus 1.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Bear fur",
+      "While this is non-members, it cannot be mixed by F2P."
+    ]
+  },
+  "Defence potion (4)": {
+    "level": 9,
+    "effect": "Temporarily raises Defence level by 8% plus 1.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Bear fur",
+      "While this is non-members, it cannot be mixed by F2P."
+    ]
+  },
+  "Necromancy potion (3)": {
+    "level": 11,
+    "effect": "Temporarily raises Necromancy level by 8% plus 1.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Cadava berries"
+    ]
+  },
+  "Necromancy potion (4)": {
+    "level": 11,
+    "effect": "Temporarily raises Necromancy level by 8% plus 1.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Cadava berries"
+    ]
+  },
+  "Antipoison": {
+    "level": 13,
+    "effect": "Cures poison and provides immunity for 3 minutes.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Unicorn horn dust",
+      "This potion cannot cure poison caused by Karambwan paste."
+    ]
+  },
+  "Serum 207": {
+    "level": 15,
+    "effect": "Temporarily cures Afflicted NPCs in Mort'ton.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Ashes",
+      "Learned and required in Shades of Mort'ton; Can be sanctified to produce Serum 208"
+    ]
+  },
+  "Guthix rest": {
+    "level": 18,
+    "effect": "Cures poison. Restores 500 life points and restores some run energy. Boosts max life points by 500.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Clean marrentill",
+      "Made during One Small Favour"
+    ]
+  },
+  "Guam tar": {
+    "level": 19,
+    "effect": "Ammunition and bait for green salamander.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Swamp tar"
+    ]
+  },
+  "Restore potion": {
+    "level": 22,
+    "effect": "Restores Attack, Strength, Defence, Magic, and Ranged by 30% of level plus 10.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Red spiders' eggs",
+      "Does not restore Constitution, Prayer, or Summoning."
+    ]
+  },
+  "Guthix balance": {
+    "level": 22,
+    "effect": "Used against Vampire Juvinates and Vampire Juveniles, particularly in the Temple Trekking minigame.",
+    "ingredients": [
+      "Restore potion",
+      "Garlic",
+      "Silver dust",
+      "Players receive partial experience (25 xp) for each of the secondary ingredients.Requires In Aid of the Myreque."
+    ]
+  },
+  "Blamish oil": {
+    "level": 25,
+    "effect": "Used to make oily fishing rods during the Heroes' Quest.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Blamish snail slime"
+    ]
+  },
+  "Energy potion (4)": {
+    "level": 26,
+    "effect": "Restores 20% run energy.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Chocolate dust",
+      "While this is non-members, it cannot be mixed by F2P."
+    ]
+  },
+  "Marrentill tar": {
+    "level": 31,
+    "effect": "Ammo for Orange salamander.",
+    "ingredients": [
+      "Marrentill potion (unf)",
+      "Swamp tar"
+    ]
+  },
+  "Super fishing explosive": {
+    "level": 31,
+    "effect": "Can be used as a Fishing explosive.",
+    "ingredients": [
+      "Guam potion (unf)",
+      "Rubium",
+      "Super fishing explosives can only be made after Kennith's concerns. Rubium is non-tradeable."
+    ]
+  },
+  "Agility potion": {
+    "level": 34,
+    "effect": "Temporarily boosts Agility by 3.",
+    "ingredients": [
+      "Toadflax potion (unf)",
+      "Toad's legs"
+    ]
+  },
+  "Combat potion": {
+    "level": 36,
+    "effect": "Effect of both Attack potion and Strength potion.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Goat horn dust"
+    ]
+  },
+  "Goblin potion": {
+    "level": 37,
+    "effect": "The potion transforms the player into a goblin during the Land of the Goblins quest.",
+    "ingredients": [
+      "Toadflax potion (unf)",
+      "Pharmakos berries",
+      "This potion will wear off if the player wears something that is not goblin-related, if the player attacks something, or if the player approaches direct sunlight. Pharmakos berries are obtained by talking to the makeover mage, after the quest. They are free."
+    ]
+  },
+  "Prayer potion (3)": {
+    "level": 38,
+    "effect": "Restores 2.5 times the player's Prayer level plus 70, resulting in a total restoration of 72-317 Prayer points.",
+    "ingredients": [
+      "Ranarr potion (unf)",
+      "Snape grass",
+      "While this is non-members, it cannot be mixed by F2P.Effect increased by holy wrench. A lifeline when fighting TzTok-Jad. Used often in Barrows."
+    ]
+  },
+  "Prayer potion (4)": {
+    "level": 38,
+    "effect": "Restores 2.5 times the player's Prayer level plus 70, resulting in a total restoration of 72-317 Prayer points.",
+    "ingredients": [
+      "Ranarr potion (unf)",
+      "Snape grass",
+      "While this is non-members, it cannot be mixed by F2P.Effect increased by holy wrench. A lifeline when fighting TzTok-Jad. Used often in Barrows."
+    ]
+  },
+  "Tarromin tar": {
+    "level": 39,
+    "effect": "Ammo for Red salamander.",
+    "ingredients": [
+      "Tarromin potion (unf)",
+      "Swamp tar"
+    ]
+  },
+  "Summoning potion (3)": {
+    "level": 40,
+    "effect": "Restores 25% of player's Summoning level plus 7.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Cockatrice egg"
+    ]
+  },
+  "Summoning potion (4)": {
+    "level": 40,
+    "effect": "Restores 25% of player's Summoning level plus 7.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Cockatrice egg"
+    ]
+  },
+  "Crafting potion": {
+    "level": 42,
+    "effect": "Temporarily boosts Crafting by 3.",
+    "ingredients": [
+      "Wergali potion (unf)",
+      "Frog spawn"
+    ]
+  },
+  "Divination potion": {
+    "level": 43,
+    "effect": "Temporarily boosts Divination by 3.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Rabbit foot",
+      "Divination potion (3) is the primary ingredient for Super divination potions."
+    ]
+  },
+  "Harralander tar": {
+    "level": 44,
+    "effect": "Ammo for Black salamander.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Swamp tar"
+    ]
+  },
+  "Super attack (3)": {
+    "level": 45,
+    "effect": "Temporarily boosts Attack by 12% plus 2.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Eye of newt",
+      "Super Attack (3) is the primary ingredient for Extreme attack potions."
+    ]
+  },
+  "Super attack (4)": {
+    "level": 45,
+    "effect": "Temporarily boosts Attack by 12% plus 2.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Eye of newt",
+      "Super Attack (3) is the primary ingredient for Extreme attack potions."
+    ]
+  },
+  "Vial of stench": {
+    "level": 46,
+    "effect": "After activation, allows players to sell goods stolen from stalls to the stall owners immediately.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Chopped onion",
+      "Talk to Chief Thief Robin in the Thieves' Guild to activate it (after A Guild of Our Own). It only needs to be in inventory to work. The potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Super antipoison (3)": {
+    "level": 48,
+    "effect": "Cures poison and provides immunity for 6 minutes.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Unicorn horn dust"
+    ]
+  },
+  "Super antipoison (4)": {
+    "level": 48,
+    "effect": "Cures poison and provides immunity for 6 minutes.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Unicorn horn dust"
+    ]
+  },
+  "Woodcutting potion": {
+    "level": 49,
+    "effect": "Temporarily boosts Woodcutting by 3.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Timber fungus"
+    ]
+  },
+  "Fishing potion": {
+    "level": 50,
+    "effect": "Temporarily boosts Fishing by 3.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Snape grass",
+      "Can be used to get into the Fishing Guild if you are a few levels short."
+    ]
+  },
+  "Mining potion": {
+    "level": 51,
+    "effect": "Temporarily boosts Mining by 3.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Calcified fungus"
+    ]
+  },
+  "Super energy (3)": {
+    "level": 52,
+    "effect": "Restores 40% run energy.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Mort myre fungus",
+      "Super energy (3) is the primary ingredient for Stamina potions."
+    ]
+  },
+  "Super energy (4)": {
+    "level": 52,
+    "effect": "Restores 40% run energy.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Mort myre fungus",
+      "Super energy (3) is the primary ingredient for Stamina potions."
+    ]
+  },
+  "Hunter potion": {
+    "level": 53,
+    "effect": "Temporarily boosts Hunter by 3.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Kebbit teeth dust",
+      "Kebbit teeth are found from deadfalling Sabre-Toothed Kebbit.Hunter potion (3) is the primary ingredient for Super hunter potions."
+    ]
+  },
+  "Runecrafting potion": {
+    "level": 54,
+    "effect": "Temporarily boosts Runecrafting by 3.",
+    "ingredients": [
+      "Wergali potion (unf)",
+      "Season sheep wool (any)",
+      "Runecrafting potion (3) is the primary ingredient for Super runecrafting potions."
+    ]
+  },
+  "Super strength (3)": {
+    "level": 55,
+    "effect": "Temporarily boosts Strength level by 12% plus 2.",
+    "ingredients": [
+      "Kwuarm potion (unf)",
+      "Limpwurt root",
+      "Super Strength (3) is the primary ingredient for Extreme strength potions."
+    ]
+  },
+  "Super strength (4)": {
+    "level": 55,
+    "effect": "Temporarily boosts Strength level by 12% plus 2.",
+    "ingredients": [
+      "Kwuarm potion (unf)",
+      "Limpwurt root",
+      "Super Strength (3) is the primary ingredient for Extreme strength potions."
+    ]
+  },
+  "Cooking potion": {
+    "level": 55,
+    "effect": "Temporarily boosts cooking level by 3.",
+    "ingredients": [
+      "Harralander potion (unf)",
+      "Swordfish",
+      "Cooking potion (3) is the primary ingredient for Super cooking potions."
+    ]
+  },
+  "Magic essence potion": {
+    "level": 57,
+    "effect": "Temporarily boosts Magic by 3 to 8.",
+    "ingredients": [
+      "Star flower",
+      "Gorak claw powder",
+      "Made during A Fairy Tale II - Cure a Queen quest. Components are only available via the fairy rings. The potion cannot be assisted as it is untradeable; its components are also untradeable."
+    ]
+  },
+  "Luck potion": {
+    "level": 57,
+    "effect": "Gives same effect as ring of Wealth.",
+    "ingredients": [
+      "Bloodweed potion (unf)",
+      "Crushed dragonstone",
+      "This potion is a single dose potion, and therefore cannot be added to a potion flask."
+    ]
+  },
+  "Fletching potion": {
+    "level": 58,
+    "effect": "Temporarily boosts Fletching by 3.",
+    "ingredients": [
+      "Wergali potion (unf)",
+      "Wimpy feather"
+    ]
+  },
+  "Weapon poison": {
+    "level": 60,
+    "effect": "Makes the player poisonous for 1 minute.",
+    "ingredients": [
+      "Kwuarm potion (unf)",
+      "Dragon scale dust"
+    ]
+  },
+  "Super restore (3)": {
+    "level": 63,
+    "effect": "Restores all stats by 25% plus 8. Prayer points are restored by 25% of the maximum plus 80.",
+    "ingredients": [
+      "Snapdragon potion (unf)",
+      "Red spiders' eggs"
+    ]
+  },
+  "Super restore (4)": {
+    "level": 63,
+    "effect": "Restores all stats by 25% plus 8. Prayer points are restored by 25% of the maximum plus 80.",
+    "ingredients": [
+      "Snapdragon potion (unf)",
+      "Red spiders' eggs"
+    ]
+  },
+  "Super hunter": {
+    "level": 64,
+    "effect": "Temporarily boosts Hunter by 5.",
+    "ingredients": [
+      "Hunter potion",
+      "Rabbit teeth",
+      "Only the 3-dose Hunter potion can be used as the primary ingredient."
+    ]
+  },
+  "Camouflage potion": {
+    "level": 65,
+    "effect": "Hides the player's minimap dot.",
+    "ingredients": [
+      "Bloodweed potion (unf)",
+      "Black salamander",
+      "This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Super defence (3)": {
+    "level": 66,
+    "effect": "Temporarily boosts Defence by 12% plus 2.",
+    "ingredients": [
+      "Cadantine potion (unf)",
+      "White berries",
+      "Super Defence (3) is the primary ingredient for Extreme defence potions."
+    ]
+  },
+  "Super defence (4)": {
+    "level": 66,
+    "effect": "Temporarily boosts Defence by 12% plus 2.",
+    "ingredients": [
+      "Cadantine potion (unf)",
+      "White berries",
+      "Super Defence (3) is the primary ingredient for Extreme defence potions."
+    ]
+  },
+  "Antipoison+": {
+    "level": 68,
+    "effect": "Cures and gives immunity to poison for 9 minutes.",
+    "ingredients": [
+      "Toadflax potion (unf)",
+      "Yew roots",
+      "Requires coconut milk in place of water."
+    ]
+  },
+  "Antifire (3)": {
+    "level": 69,
+    "effect": "Provides resistance to Dragonfire for 6 minutes.",
+    "ingredients": [
+      "Lantadyme potion (unf)",
+      "Dragon scale dust",
+      "Can be used with an Anti-dragon shield or Dragonfire shield to completely prevent dragonfire damage. Each dose lasts for 6 minutes (you will get a 15 second warning before it runs out).Antifire (3) is the primary ingredient for Super antifire potions."
+    ]
+  },
+  "Antifire (4)": {
+    "level": 69,
+    "effect": "Provides resistance to Dragonfire for 6 minutes.",
+    "ingredients": [
+      "Lantadyme potion (unf)",
+      "Dragon scale dust",
+      "Can be used with an Anti-dragon shield or Dragonfire shield to completely prevent dragonfire damage. Each dose lasts for 6 minutes (you will get a 15 second warning before it runs out).Antifire (3) is the primary ingredient for Super antifire potions."
+    ]
+  },
+  "Super divination": {
+    "level": 70,
+    "effect": "Temporarily boosts Divination by 5.",
+    "ingredients": [
+      "Divination potion",
+      "Zygomite fruit",
+      "Only the 3-dose Divination potion can be used as the primary ingredient."
+    ]
+  },
+  "Super woodcutting potion": {
+    "level": 71,
+    "effect": "Temporarily boosts Woodcutting by 5.",
+    "ingredients": [
+      "Woodcutting potion (3)",
+      "Enriched timber fungus"
+    ]
+  },
+  "Super ranging (3)": {
+    "level": 72,
+    "effect": "Temporarily boosts Ranged by 12% plus 2.",
+    "ingredients": [
+      "Dwarf weed potion (unf)",
+      "Wine of Zamorak",
+      "Super Ranging potion (3) is the primary ingredient for Extreme ranging potions."
+    ]
+  },
+  "Super ranging (4)": {
+    "level": 72,
+    "effect": "Temporarily boosts Ranged by 12% plus 2.",
+    "ingredients": [
+      "Dwarf weed potion (unf)",
+      "Wine of Zamorak",
+      "Super Ranging potion (3) is the primary ingredient for Extreme ranging potions."
+    ]
+  },
+  "Weapon poison+": {
+    "level": 73,
+    "effect": "Makes the player poisonous for 5 minutes.",
+    "ingredients": [
+      "Cactus spine",
+      "Red spiders' eggs",
+      "Requires coconut milk in place of water."
+    ]
+  },
+  "Super mining potion": {
+    "level": 74,
+    "effect": "Temporarily boosts Mining by 5.",
+    "ingredients": [
+      "Mining potion (3)",
+      "Enriched calcified fungus"
+    ]
+  },
+  "Super runecrafting (3)": {
+    "level": 75,
+    "effect": "Temporarily boosts Runecrafting by 5.",
+    "ingredients": [
+      "Runecrafting potion",
+      "Yak milk",
+      "Only the 3-dose Runecrafting potion can be used as the primary ingredient."
+    ]
+  },
+  "Super runecrafting (4)": {
+    "level": 75,
+    "effect": "Temporarily boosts Runecrafting by 5.",
+    "ingredients": [
+      "Runecrafting potion",
+      "Yak milk",
+      "Only the 3-dose Runecrafting potion can be used as the primary ingredient."
+    ]
+  },
+  "Super fishing potion": {
+    "level": 75,
+    "effect": "Temporarily boosts Fishing by 5.",
+    "ingredients": [
+      "Fishing potion (3)",
+      "Enriched fungal algae"
+    ]
+  },
+  "Super magic (3)": {
+    "level": 76,
+    "effect": "Temporarily boosts Magic by 12% plus 2.",
+    "ingredients": [
+      "Lantadyme potion (unf)",
+      "Potato cactus",
+      "Super Magic potion (3) is the primary ingredient for Extreme magic potions."
+    ]
+  },
+  "Super magic (4)": {
+    "level": 76,
+    "effect": "Temporarily boosts Magic by 12% plus 2.",
+    "ingredients": [
+      "Lantadyme potion (unf)",
+      "Potato cactus",
+      "Super Magic potion (3) is the primary ingredient for Extreme magic potions."
+    ]
+  },
+  "Stamina potion (3)": {
+    "level": 77,
+    "effect": "Temporarily boosts Agility by 6, significantly reduces the speed at which run energy drains and run energy is restored to 100% every few seconds for 6 minutes.",
+    "ingredients": [
+      "Super energy (3)",
+      "Arbuck potion (unf)"
+    ]
+  },
+  "Stamina potion (4)": {
+    "level": 77,
+    "effect": "Temporarily boosts Agility by 6, significantly reduces the speed at which run energy drains and run energy is restored to 100% every few seconds for 6 minutes.",
+    "ingredients": [
+      "Super energy (3)",
+      "Arbuck potion (unf)"
+    ]
+  },
+  "Enhanced luck potion": {
+    "level": 77,
+    "effect": "Grants the effects of a ring of fortune for 1 hour.",
+    "ingredients": [
+      "Luck potion",
+      "Onyx bolt tips"
+    ]
+  },
+  "Archaeology potion": {
+    "level": 78,
+    "effect": "Temporarily boosts Archaeology by 3 levels.",
+    "ingredients": [
+      "Avantoe potion (unf)",
+      "Soil",
+      "Must first be learned using the Archaeology potion recipe."
+    ]
+  },
+  "Zamorak brew (3)": {
+    "level": 78,
+    "effect": "Temporarily boosts Attack and Strength by 8% plus 1, and restores Prayer points by 8% of the maximum plus 20, but lowers Defence by 8% plus 1 and removes 12% of life points.",
+    "ingredients": [
+      "Torstol potion (unf)",
+      "Jangerberries"
+    ]
+  },
+  "Antipoison++": {
+    "level": 79,
+    "effect": "Cures poison and provides immunity for 12 minutes.",
+    "ingredients": [
+      "Irit potion (unf)",
+      "Magic roots",
+      "Requires coconut milk in place of water."
+    ]
+  },
+  "Super cooking potion": {
+    "level": 79,
+    "effect": "Temporarily boosts cooking by 5.",
+    "ingredients": [
+      "Cooking potion",
+      "Zygomite fruit"
+    ]
+  },
+  "Super necromancy (3)": {
+    "level": 79,
+    "effect": "Temporarily boosts necromancy by 12% plus 2.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Congealed blood",
+      "Super necromancy potion (3) is the primary ingredient for Extreme necromancy potions."
+    ]
+  },
+  "Super necromancy (4)": {
+    "level": 79,
+    "effect": "Temporarily boosts necromancy by 12% plus 2.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Congealed blood",
+      "Super necromancy potion (3) is the primary ingredient for Extreme necromancy potions."
+    ]
+  },
+  "Extreme hunter": {
+    "level": 80,
+    "effect": "Temporarily boosts Hunter by 15% plus 3.",
+    "ingredients": [
+      "Super hunter",
+      "Bull horns",
+      "Only the 3-dose Super hunter potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Saradomin brew (3)": {
+    "level": 81,
+    "effect": "Temporarily boosts Defence by 4% plus 1 and heals 1000 life points but lowers Attack, Strength, Ranged and Magic by 4% + 1.",
+    "ingredients": [
+      "Toadflax potion (unf)",
+      "Crushed nest",
+      "See above for Toadflax locations."
+    ]
+  },
+  "Saradomin brew (4)": {
+    "level": 81,
+    "effect": "Temporarily boosts Defence by 4% plus 1 and heals 1000 life points but lowers Attack, Strength, Ranged and Magic by 4% + 1.",
+    "ingredients": [
+      "Toadflax potion (unf)",
+      "Crushed nest",
+      "See above for Toadflax locations."
+    ]
+  },
+  "Weapon poison++ (3)": {
+    "level": 82,
+    "effect": "Makes the player poisonous for 7 minutes.",
+    "ingredients": [
+      "Cave nightshade",
+      "Poison ivy berries",
+      "Requires coconut milk in place of water."
+    ]
+  },
+  "Weapon poison++ (4)": {
+    "level": 82,
+    "effect": "Makes the player poisonous for 7 minutes.",
+    "ingredients": [
+      "Cave nightshade",
+      "Poison ivy berries",
+      "Requires coconut milk in place of water."
+    ]
+  },
+  "Aggression potion (3)": {
+    "level": 82,
+    "effect": "Makes nearby attackable NPCs aggressive.",
+    "ingredients": [
+      "Bloodweed potion (unf)",
+      "Searing ashes"
+    ]
+  },
+  "Aggression potion (4)": {
+    "level": 82,
+    "effect": "Makes nearby attackable NPCs aggressive.",
+    "ingredients": [
+      "Bloodweed potion (unf)",
+      "Searing ashes"
+    ]
+  },
+  "Adrenaline potion (3)": {
+    "level": 84,
+    "effect": "Recovers Adrenaline bar by 25%. Can only be used every 120 seconds.",
+    "ingredients": [
+      "Super energy (3)",
+      "Papaya fruit",
+      "Only the 3-dose Super energy potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Adrenaline potion (4)": {
+    "level": 84,
+    "effect": "Recovers Adrenaline bar by 25%. Can only be used every 120 seconds.",
+    "ingredients": [
+      "Super energy (3)",
+      "Papaya fruit",
+      "Only the 3-dose Super energy potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Super antifire (3)": {
+    "level": 85,
+    "effect": "Provides immunity to Dragonfire for 6 minutes even if anti-dragon shield is not equipped.",
+    "ingredients": [
+      "Antifire (3)",
+      "Phoenix feather",
+      "Only the 3-dose antifire potion can be used as the primary ingredient. Super antifire (3) is the primary ingredient for Extended super antifire potions."     
+    ]
+  },
+  "Super antifire (4)": {
+    "level": 85,
+    "effect": "Provides immunity to Dragonfire for 6 minutes even if anti-dragon shield is not equipped.",
+    "ingredients": [
+      "Antifire (3)",
+      "Phoenix feather",
+      "Only the 3-dose antifire potion can be used as the primary ingredient. Super antifire (3) is the primary ingredient for Extended super antifire potions."     
+    ]
+  },
+  "Super adrenaline potion (3)": {
+    "level": 87,
+    "effect": "Recovers Adrenaline bar by 30%. Can only be used every 120 seconds.",
+    "ingredients": [
+      "Adrenaline potion (3)",
+      "Adrenaline crystal",
+      "Only the 3-dose adrenaline potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Super adrenaline potion (4)": {
+    "level": 87,
+    "effect": "Recovers Adrenaline bar by 30%. Can only be used every 120 seconds.",
+    "ingredients": [
+      "Adrenaline potion (3)",
+      "Adrenaline crystal",
+      "Only the 3-dose adrenaline potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Super invention": {
+    "level": 87,
+    "effect": "Temporarily boosts Invention by 5.",
+    "ingredients": [
+      "Invention potion",
+      "Spider fangs",
+      "Only the 3-dose Invention potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme attack (3)": {
+    "level": 88,
+    "effect": "Temporarily boosts Attack by 15% plus 3.",
+    "ingredients": [
+      "Super attack (3)",
+      "Clean avantoe",
+      "Only the 3-dose Super attack potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme attack (4)": {
+    "level": 88,
+    "effect": "Temporarily boosts Attack by 15% plus 3.",
+    "ingredients": [
+      "Super attack (3)",
+      "Clean avantoe",
+      "Only the 3-dose Super attack potion can be used as the primary ingredient."
+    ]
+  },
+  "Summoning renewal": {
+    "level": 88,
+    "effect": "Replenishes Summoning points and special move points over a 6 minute period.",
+    "ingredients": [
+      "Spirit weed potion (unf)",
+      "Tombshroom",
+      "Must first be learned using the Summoning renewal recipe."
+    ]
+  },
+  "Extreme strength (3)": {
+    "level": 89,
+    "effect": "Temporarily boosts Strength by 15% plus 3.",
+    "ingredients": [
+      "Super strength (3)",
+      "Clean dwarf weed",
+      "Only the 3-dose Super strength potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme strength (4)": {
+    "level": 89,
+    "effect": "Temporarily boosts Strength by 15% plus 3.",
+    "ingredients": [
+      "Super strength (3)",
+      "Clean dwarf weed",
+      "Only the 3-dose Super strength potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme divination": {
+    "level": 89,
+    "effect": "Temporarily boosts Divination by 15% plus 3.",
+    "ingredients": [
+      "Super divination (3)",
+      "Yak tuft",
+      "Only the 3-dose Super divination potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Extreme defence (3)": {
+    "level": 90,
+    "effect": "Temporarily boosts Defence by 15% plus 3.",
+    "ingredients": [
+      "Super defence (3)",
+      "Clean lantadyme",
+      "Only the 3-dose Super defence potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme defence (4)": {
+    "level": 90,
+    "effect": "Temporarily boosts Defence by 15% plus 3.",
+    "ingredients": [
+      "Super defence (3)",
+      "Clean lantadyme",
+      "Only the 3-dose Super defence potion can be used as the primary ingredient."
+    ]
+  },
+  "Extended super antifire": {
+    "level": 90,
+    "effect": "Provides immunity to Dragonfire for 12 minutes even if anti-dragon shield is not equipped.",
+    "ingredients": [
+      "Super antifire (3)",
+      "Clean arbuck",
+      "Only the 3-dose Super antifire potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Extreme magic (3)": {
+    "level": 91,
+    "effect": "Temporarily boosts Magic by 15% plus 3.",
+    "ingredients": [
+      "Super magic (3)",
+      "Ground mud runes",
+      "Only the 3-dose Super magic potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme magic (4)": {
+    "level": 91,
+    "effect": "Temporarily boosts Magic by 15% plus 3.",
+    "ingredients": [
+      "Super magic (3)",
+      "Ground mud runes",
+      "Only the 3-dose Super magic potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme runecrafting": {
+    "level": 91,
+    "effect": "Temporarily boosts Runecrafting by 15% plus 3.",
+    "ingredients": [
+      "Super runecrafting (3)",
+      "Spider venom",
+      "Only the 3-dose Super runecrafting potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Extreme ranging (3)": {
+    "level": 92,
+    "effect": "Temporarily boosts Ranged by 15% plus 3.",
+    "ingredients": [
+      "Super ranging (3)",
+      "Grenwall spikes",
+      "Only the 3-dose super ranging potion can be used as the primary ingredient. Five grenwall spikes are needed per super ranging potion to make one extreme ranging."
+    ]
+  },
+  "Extreme ranging (4)": {
+    "level": 92,
+    "effect": "Temporarily boosts Ranged by 15% plus 3.",
+    "ingredients": [
+      "Super ranging (3)",
+      "Grenwall spikes",
+      "Only the 3-dose super ranging potion can be used as the primary ingredient. Five grenwall spikes are needed per super ranging potion to make one extreme ranging."
+    ]
+  },
+  "Super Saradomin brew": {
+    "level": 93,
+    "effect": "Restores 1300 life points. Temporarily boosts Defence by 6% plus 1, and drains Attack, Strength, Magic and Ranged by 4% plus 1.",
+    "ingredients": [
+      "Saradomin brew (3)",
+      "Wine of Saradomin",
+      "Only the 3-dose Saradomin brew can be used as the primary ingredient."
+    ]
+  },
+  "Super Zamorak brew": {
+    "level": 93,
+    "effect": "Temporarily boosts Attack, Strength, Magic and Ranged by 12% plus 2. Drains Defence by 10% and removes ?% of life points.",
+    "ingredients": [
+      "Zamorak brew (3)",
+      "Wine of Zamorak",
+      "Only the 3-dose Zamorak brew can be used as the primary ingredient."
+    ]
+  },
+  "Super Guthix rest": {
+    "level": 93,
+    "effect": "Cures poison. Restores 650 life points. Boosts your maximum life points by 650.",
+    "ingredients": [
+      "Guthix rest",
+      "Wine of Guthix",
+      "Only the 3-dose Guthix rest can be used as the primary ingredient."
+    ]
+  },
+  "Extreme necromancy (3)": {
+    "level": 93,
+    "effect": "Temporarily boosts Necromancy by 15% plus 3.",
+    "ingredients": [
+      "Super necromancy (3)",
+      "Ground miasma rune",
+      "Only the 3-dose Super necromancy potion can be used as the primary ingredient."
+    ]
+  },
+  "Extreme necromancy (4)": {
+    "level": 93,
+    "effect": "Temporarily boosts Necromancy by 15% plus 3.",
+    "ingredients": [
+      "Super necromancy (3)",
+      "Ground miasma rune",
+      "Only the 3-dose Super necromancy potion can be used as the primary ingredient."
+    ]
+  },
+  "Super prayer (3)": {
+    "level": 94,
+    "effect": "Restores Prayer points by 35% plus 70.",
+    "ingredients": [
+      "Prayer potion (3)",
+      "Wyvern bonemeal",
+      "Only the 3-dose Prayer potion can be used as the primary ingredient."
+    ]
+  },
+  "Super prayer (4)": {
+    "level": 94,
+    "effect": "Restores Prayer points by 35% plus 70.",
+    "ingredients": [
+      "Prayer potion (3)",
+      "Wyvern bonemeal",
+      "Only the 3-dose Prayer potion can be used as the primary ingredient."
+    ]
+  },
+  "Prayer renewal (3)": {
+    "level": 94,
+    "effect": "Restores 4 times the player's Prayer level plus 120, resulting in a total restoration of 124-516 Prayer points, over a period of 5 minutes.",
+    "ingredients": [
+      "Fellstalk potion (unf)",
+      "Morchella mushroom"
+    ]
+  },
+  "Prayer renewal (4)": {
+    "level": 94,
+    "effect": "Restores 4 times the player's Prayer level plus 120, resulting in a total restoration of 124-516 Prayer points, over a period of 5 minutes.",
+    "ingredients": [
+      "Fellstalk potion (unf)",
+      "Morchella mushroom"
+    ]
+  },
+  "Extreme invention": {
+    "level": 95,
+    "effect": "Temporarily boosts Invention by 15% plus 3.",
+    "ingredients": [
+      "Super invention",
+      "Mycelial webbing",
+      "Only the 3-dose Super invention potion can be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."
+    ]
+  },
+  "Harvest potion": {
+    "level": 95,
+    "effect": "Allows players to harvest mutated 'mega' versions of allotment produce for 6 minutes.",
+    "ingredients": [
+      "Primal extract",
+      "Clean arbuck",
+      "Watermelon",
+      "Produce harvested under the effect of the potion provide less yield. The mutated produce is used to make primal starters, primal main courses, and primal desserts - the components of the primal feast."
+    ]
+  },
+  "Overload (3)": {
+    "level": 96,
+    "effect": "Boosts Attack, Strength, Defence, Ranged, Magic, and Necromancy by 15% of the stat level + 3 for 6 minutes. The boost is reapplied every 15 seconds.",    "ingredients": [
+      "Extreme attack (3)",
+      "Extreme strength (3)",
+      "Extreme defence (3)",
+      "Extreme magic (3)",
+      "Extreme ranging (3)",
+      "Extreme necromancy (3)",
+      "Clean torstol",
+      "All six of the required potions must be of the 3-dose variant to be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."    
+    ]
+  },
+  "Overload (4)": {
+    "level": 96,
+    "effect": "Boosts Attack, Strength, Defence, Ranged, Magic, and Necromancy by 15% of the stat level + 3 for 6 minutes. The boost is reapplied every 15 seconds.",    "ingredients": [
+      "Extreme attack (3)",
+      "Extreme strength (3)",
+      "Extreme defence (3)",
+      "Extreme magic (3)",
+      "Extreme ranging (3)",
+      "Extreme necromancy (3)",
+      "Clean torstol",
+      "All six of the required potions must be of the 3-dose variant to be used as the primary ingredient. This potion cannot be assisted, as it is untradeable."    
+    ]
+  },
+  "Weapon poison+++ (3)": {
+    "level": 100,
+    "effect": "Makes the player poisonous for 12 minutes.",
+    "ingredients": [
+      "Weapon poison++ (3)",
+      "Poison slime",
+      "Primal extract"
+    ]
+  },
+  "Charming potion": {
+    "level": 102,
+    "effect": "Increases the base number of charms dropped by a monster by 1 for 6 minutes.",
+    "ingredients": [
+      "Primal extract",
+      "Charms",
+      "Spark chitin",
+      "Requires 4 of each charm."
+    ]
+  },
+  "Extreme cooking potion": {
+    "level": 104,
+    "effect": "Temporarily boosts cooking by 17.",
+    "ingredients": [
+      "Super cooking potion",
+      "Primal extract",
+      "Beak snot"
+    ]
+  },
+  "Adrenaline renewal potion": {
+    "level": 115,
+    "effect": "Increases adrenaline by 4% per tick for 10 ticks, for a total of 40% adrenaline.",
+    "ingredients": [
+      "Primal extract",
+      "Super adrenaline potion (4)",
+      "Bottled dinosaur roar",
+      "Clean arbuck",
+      "Drinking this triggers the adrenaline potion cooldown. At levels 117 and 119 the recipe is improved. Can also be made starting from an Enhanced replenishment potion."
+    ]
+  },
+  "Spirit attraction potion": {
+    "level": 116,
+    "effect": "Automatically collects various spirits spawned while skilling for a period of 6 minutes.",
+    "ingredients": [
+      "Primal extract",
+      "Enhanced luck potion",
+      "Timeworn tincture",
+      "Must first be learned using the spirit attraction recipe."
+    ]
+  },
+  "Extreme prayer": {
+    "level": 117,
+    "effect": "Restores up to 70 + 50% prayer points per dose.",
+    "ingredients": [
+      "Super prayer (3)",
+      "Primal extract",
+      "Spark chitin"
+    ]
+  },
+  "Poison bomb Improved+1": {
+    "level": 101,
+    "effect": "Creates a 3x3 area for 6 seconds that poisons targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean irit",
+      "Poison slime X2",
+      "Weapon poison++ (4)",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Poison bomb Improved+2": {
+    "level": 103,
+    "effect": "Creates a 3x3 area for 6 seconds that poisons targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean irit",
+      "Poison slime",
+      "Weapon poison++ (3)",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Sticky bomb": {
+    "level": 101,
+    "effect": "Creates a 3x3 area for 6 seconds that binds targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean cadantine",
+      "Dinosaur claws X2",
+      "Beak snot X2",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Sticky bomb Improved +1": {
+    "level": 103,
+    "effect": "Creates a 3x3 area for 6 seconds that binds targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean cadantine",
+      "Dinosaur claws X2",
+      "Beak snot X2",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Sticky bomb Improved +2": {
+    "level": 105,
+    "effect": "Creates a 3x3 area for 6 seconds that binds targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean cadantine",
+      "Dinosaur claws",
+      "Beak snot",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Vulnerability bomb": {
+    "level": 103,
+    "effect": "Creates a 3x3 area for 1.8 seconds that applies the Vulnerability effect to targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean dwarf weed",
+      "Bottled dinosaur roar X2",
+      "Soul rune X5",
+      "Chaos rune X5",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Vulnerability bomb Improved +1": {
+    "level": 105,
+    "effect": "Creates a 3x3 area for 1.8 seconds that applies the Vulnerability effect to targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean dwarf weed",
+      "Bottled dinosaur roar X2",
+      "Soul rune X5",
+      "Chaos rune X5",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Vulnerability bomb Improved +2": {
+    "level": 107,
+    "effect": "Creates a 3x3 area for 1.8 seconds that applies the Vulnerability effect to targets stood in it.",
+    "ingredients": [
+      "Primal extract",
+      "Clean dwarf weed",
+      "Bottled dinosaur roar",
+      "Soul rune X3",
+      "Chaos rune X3",
+      "Bomb Vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "": {
+    "level": null,
+    "effect": "",
+    "ingredients": []
+  },
+  "Powerburst of opportunity": {
+    "level": 103,
+    "effect": "Doubles the effect of Rockertunities and Archaeology time sprites for 15 seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Dinosaur claws X2",
+      "Phasmatite",
+      "Third Age iron",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of opportunity Improved +1": {
+    "level": 105,
+    "effect": "Doubles the effect of Rockertunities and Archaeology time sprites for 15 seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Dinosaur claws X2",
+      "Phasmatite",
+      "Third Age iron",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of opportunity Improved +2": {
+    "level": 107,
+    "effect": "Doubles the effect of Rockertunities and Archaeology time sprites for 15 seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Dinosaur claws",
+      "Phasmatite",
+      "Third Age iron",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of vitality": {
+    "level": 105,
+    "effect": "Doubles maximum and current life points for six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Poison slime X2",
+      "Saradomin brew (4)",
+      "Rocktail",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of vitality Improved +1": {
+    "level": 107,
+    "effect": "Doubles maximum and current life points for six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Poison slime X2",
+      "Saradomin brew (4)",
+      "Rocktail",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of vitality Improved +2": {
+    "level": 109,
+    "effect": "Doubles maximum and current life points for six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Poison slime",
+      "Saradomin brew (3)",
+      "Rocktail",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of masterstroke": {
+    "level": 108,
+    "effect": "For the next four hammer swings within 30 seconds, Smithing progress is multiplied by ten.",
+    "ingredients": [
+      "Primal extract",
+      "Runite stone spirit",
+      "Necrite stone spirit",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of masterstroke Improved +1": {
+    "level": 110,
+    "effect": "For the next four hammer swings within 30 seconds, Smithing progress is multiplied by ten.",
+    "ingredients": [
+      "Primal extract",
+      "Runite stone spirit",
+      "Necrite stone spirit",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of masterstroke Improved +2": {
+    "level": 112,
+    "effect": "For the next four hammer swings within 30 seconds, Smithing progress is multiplied by ten.",
+    "ingredients": [
+      "Primal extract",
+      "Runite stone spirit",
+      "Necrite stone spirit",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of sorcery": {
+    "level": 109,
+    "effect": "For the next runes crafted within 10 seconds, the 'runes per essence' multiplier is doubled.",
+    "ingredients": [
+      "Primal extract",
+      "Super runecrafting (4)",
+      "Blood rune",
+      "Beak snot",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of sorcery Improved +1": {
+    "level": 111,
+    "effect": "For the next runes crafted within 10 seconds, the 'runes per essence' multiplier is doubled.",
+    "ingredients": [
+      "Primal extract",
+      "Super runecrafting (4)",
+      "Blood rune",
+      "Beak snot",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of sorcery Improved +2": {
+    "level": 113,
+    "effect": "For the next runes crafted within 10 seconds, the 'runes per essence' multiplier is doubled.",
+    "ingredients": [
+      "Primal extract",
+      "Super runecrafting (3)",
+      "Blood rune",
+      "Beak snot",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of acceleration": {
+    "level": 111,
+    "effect": "The cooldown of Surge and Bladed Dive is instantly reset and is 1.2 seconds for the next six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Stamina potion (4)",
+      "Energy potion (4)",
+      "Spark chitin",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of acceleration Improved +1": {
+    "level": 113,
+    "effect": "The cooldown of Surge and Bladed Dive is instantly reset and is 1.2 seconds for the next six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Stamina potion (4)",
+      "Energy potion (4)",
+      "Spark chitin",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of acceleration Improved +2": {
+    "level": 115,
+    "effect": "The cooldown of Surge and Bladed Dive is instantly reset and is 1.2 seconds for the next six seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Stamina potion (3)",
+      "Energy potion (3)",
+      "Spark chitin",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of feats": {
+    "level": 114,
+    "effect": "The familiar's special move costs no special move points for ten seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Summoning potion (4)",
+      "Clean snapdragon",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of feats Improved +1": {
+    "level": 116,
+    "effect": "The familiar's special move costs no special move points for ten seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Summoning potion (4)",
+      "Clean snapdragon",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Powerburst of feats Improved +2": {
+    "level": 118,
+    "effect": "The familiar's special move costs no special move points for ten seconds.",
+    "ingredients": [
+      "Primal extract",
+      "Summoning potion (3)",
+      "Clean snapdragon",
+      "Bottled dinosaur roar",
+      "powerburst vial",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Juju hunter potion": {
+    "level": 54,
+    "effect": "Necessary to attract certain Jadinkos (pour on vine flower patch)",
+    "ingredients": [
+      "Erzille",
+      "Corrupt vine",
+      "juju vial of water"
+    ]
+  },
+  "Scentless potion": {
+    "level": 59,
+    "effect": "When you drink all your traps will be considered smoked",
+    "ingredients": [
+      "Argway",
+      "Shadow vine",
+      "juju vial of water"
+    ]
+  },
+  "Juju farming potion": {
+    "level": 64,
+    "effect": "33% chance of picking two herbs from a herb patch (chance on a per-pick basis)",
+    "ingredients": [
+      "Ugune",
+      "Marble vine",
+      "juju vial of water"
+    ]
+  },
+  "Juju cooking potion": {
+    "level": 67,
+    "effect": "Use on a baked potato to make a strange potato then add tuna and corn to make juju gumbo",
+    "ingredients": [
+      "Shengo",
+      "Plant teeth",
+      "juju vial of water"
+    ]
+  },
+  "Juju fishing potion": {
+    "level": 70,
+    "effect": "33% chance of catching a raw baron shark when fishing sharks, per catch",
+    "ingredients": [
+      "Shengo",
+      "Aquatic vine",
+      "juju vial of water"
+    ]
+  },
+  "Juju woodcutting potion": {
+    "level": 71,
+    "effect": "10% chance of finding a wood spirit when woodcutting, per log",
+    "ingredients": [
+      "Samaden",
+      "Oily vine",
+      "juju vial of water"
+    ]
+  },
+  "Juju mining potion": {
+    "level": 74,
+    "effect": "10% chance of finding a stone spirit when mining, per ore",
+    "ingredients": [
+      "Samaden",
+      "Draconic vine",
+      "juju vial of water"
+    ]
+  },
+  "Saradomin's blessing": {
+    "level": 75,
+    "effect": "Provides a +10% bonus to Farming experience when farming in the Herblore Habitat",
+    "ingredients": [
+      "Samaden",
+      "Saradomin vine",
+      "juju vial of water"
+    ]
+  },
+  "Guthix's gift": {
+    "level": 75,
+    "effect": "Provides a +10% bonus to Herblore XP when making Juju potions (not necessarily in the Habitat)",
+    "ingredients": [
+      "Samaden",
+      "Guthix vine",
+      "juju vial of water"
+    ]
+  },
+  "Zamorak's favour": {
+    "level": 75,
+    "effect": "Provides a +10% bonus to Hunter XP when hunting jadinkos in the Herblore Habitat",
+    "ingredients": [
+      "Samaden",
+      "Zamorak vine",
+      "juju vial of water"
+    ]
+  },
+  "Perfect woodcutting": {
+    "level": 75,
+    "effect": "5% chance of receiving double logs, or double cuts from ivy and crystal trees",
+    "ingredients": [
+      "Juju woodcutting potion",
+      "Harmony moss"
+    ]
+  },
+  "Perfect farming": {
+    "level": 77,
+    "effect": "\"25% chance of double harmony moss from a harmony pillar",
+    "ingredients": []
+  },
+  "5% chance of receiving harmony moss when fully harvesting or checking another farming patch\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony moss"
+    ]
+  },
+  "Perfect mining": {
+    "level": 80,
+    "effect": "\"10% chance to receive a bottled stone spirit of the type of ore mined",
+    "ingredients": []
+  },
+  "Your stamina will immediately refill each time a stone spirit is consumed\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony moss"
+    ]
+  },
+  "Perfect smithing": {
+    "level": 82,
+    "effect": "5% chance for double progress when smithing",
+    "ingredients": [
+      "Juju hunter potion",
+      "Harmony moss"
+    ]
+  },
+  "Perfect agility": {
+    "level": 85,
+    "effect": "Increases the chances of the window shortcut opening and a light creature appearing on the cathedral roof",
+    "ingredients": [
+      "Scentless potion",
+      "Harmony moss"
+    ]
+  },
+  "Perfect prayer": {
+    "level": 87,
+    "effect": "\"5% increase to XP gained from PoH chapel altars",
+    "ingredients": []
+  },
+  "5% increase to XP when cleansing the corrupted Seren stone\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony moss"
+    ]
+  },
+  "Perfect herblore": {
+    "level": 90,
+    "effect": "\"10% additional chance of finding a recipe while Dungeoneering",
+    "ingredients": []
+  },
+  "5% additional XP when making combination potions\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony moss"
+    ]
+  },
+  "Perfect dungeoneering": {
+    "level": 91,
+    "effect": "\"5% addition to damage dealt when in a dungeon",
+    "ingredients": []
+  },
+  "(This potion lasts for 4 hours per dose).\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony moss"
+    ]
+  },
+  "Perfect fishing": {
+    "level": 92,
+    "effect": "\"5% increase to fishing catch chance",
+    "ingredients": []
+  },
+  "33% chance of catching a raw baron shark when fishing sharks\"": {
+    "level": null,
+    "effect": "1",
+    "ingredients": [
+      "Harmony dust"
+    ]
+  },
+  "Perfect plus": {
+    "level": 99,
+    "effect": "Provides the effects of all perfect juju potions for four hours per dose",
+    "ingredients": [
+      "Overload (4)",
+      "Crystal flask",
+      "Crystal tree blossom",
+      "Harmony moss"
+    ]
+  },
+  "Super melee potion (6)": {
+    "level": 81,
+    "effect": "Temporary boost to Attack, Strength and Defence levels of 12%+2.",
+    "ingredients": [
+      "Super defence (4)",
+      "Super strength (4)",
+      "Super attack (4)",
+      "Crystal flask"
+    ]
+  },
+  "Super warmaster's potion (6)": {
+    "level": 85,
+    "effect": "Temporary boost to Magic, Ranged, Attack, Strength and Defence levels of 12%+2.",
+    "ingredients": [
+      "Super ranging (4)",
+      "Super magic (4)",
+      "Super defence (4)",
+      "Super strength (4)",
+      "Super attack (4)"
+    ]
+  },
+  "Super prayer renewal potion (6)": {
+    "level": 96,
+    "effect": "Restores 25%+70 of total Prayer points as well as 595 Prayer points over the course of 6 minutes.",
+    "ingredients": [
+      "Prayer renewal (4)",
+      "Prayer potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Grand attack potion (6)": {
+    "level": 78,
+    "effect": "Temporary Attack level boost of 14%+2.",
+    "ingredients": [
+      "Super attack (4)",
+      "Attack potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Grand strength potion (6)": {
+    "level": 75,
+    "effect": "Temporary Strength level boost of 14%+2.",
+    "ingredients": [
+      "Super strength (4)",
+      "Strength potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Grand defence potion (6)": {
+    "level": 79,
+    "effect": "Temporary Defence level boost of 14%+2.",
+    "ingredients": [
+      "Super defence (4)",
+      "Defence potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Grand ranging potion (6)": {
+    "level": 76,
+    "effect": "Temporary Ranged level boost of 14%+2.",
+    "ingredients": [
+      "Super ranging (4)",
+      "Ranging potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Grand magic potion (6)": {
+    "level": 77,
+    "effect": "Temporary Magic level boost of 14%+2.",
+    "ingredients": [
+      "Super magic (4)",
+      "Magic potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Extreme brawler's potion (6)": {
+    "level": 91,
+    "effect": "Temporary boost to Attack, Strength and Defence levels of 15%+3.",
+    "ingredients": [
+      "Extreme attack (4)",
+      "Extreme defence (4)",
+      "Extreme strength (4)"
+    ]
+  },
+  "Extreme sharpshooter's potion (6)": {
+    "level": 92,
+    "effect": "Temporary boost to Ranged and Defence levels of 15%+3.",
+    "ingredients": [
+      "Extreme ranging (4)",
+      "Extreme defence (4)",
+      "Crystal flask"
+    ]
+  },
+  "Extreme battlemage's potion (6)": {
+    "level": 91,
+    "effect": "Temporary boost to Magic and Defence levels of 15%+3.",
+    "ingredients": [
+      "Extreme magic (4)",
+      "Extreme defence (4)",
+      "Crystal flask"
+    ]
+  },
+  "Extreme warmaster's potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Attack, Strength, Defence, Ranged, and Magic levels of 15%+3.",
+    "ingredients": [
+      "Extreme attack (4)",
+      "Extreme defence (4)",
+      "Extreme strength (4)",
+      "Extreme ranging (4)",
+      "Extreme magic (4)"
+    ]
+  },
+  "Holy overload potion (6)": {
+    "level": 97,
+    "effect": "Gives the effect of the overload potion for 6 minutes, with the buffs renewing every 15 seconds. Restores 545 Prayer points over 6 minutes.",
+    "ingredients": [
+      "Overload (4)",
+      "Prayer renewal (4)",
+      "Crystal flask"
+    ]
+  },
+  "Searing overload potion (6)": {
+    "level": 97,
+    "effect": "Gives the effect of the overload potion for 6 minutes, with the buffs renewing every 15 seconds. Gives 6 minutes of complete dragonfire protection.", 
+    "ingredients": [
+      "Overload (4)",
+      "Super antifire (4)",
+      "Crystal flask"
+    ]
+  },
+  "Overload salve (6)": {
+    "level": 97,
+    "effect": "Temporary boost to Attack, Strength, Ranged, Magic, Defence, and Necromancy level of 15%+3. Restores 555 Prayer points and protects from dragonfire, wyvern breath and poison over the course of 6 minutes.",
+    "ingredients": [
+      "Overload (4)",
+      "Super antifire (4)",
+      "Antifire (4)",
+      "Prayer renewal (4)",
+      "Prayer potion (4)",
+      "Super antipoison (4)",
+      "Crystal flask"
+    ]
+  },
+  "Aggroverload (6)": {
+    "level": 96,
+    "effect": "Gives the effect of the overload potion for 6 minutes, with the buffs renewing every 15 seconds. All enemies in an 8 tile radius will become aggressive.",
+    "ingredients": [
+      "Overload (4)",
+      "Aggression potion (4)",
+      "Clean arbuck",
+      "Crystal flask"
+    ]
+  },
+  "Holy aggroverload (6)": {
+    "level": 98,
+    "effect": "Gives the effect of the overload potion for 6 minutes, with the buffs renewing every 15 seconds. Restores 545 Prayer points over 6 minutes. All enemies in an 8 tile radius will become aggressive.",
+    "ingredients": [
+      "Overload (4)",
+      "Aggression potion (4)",
+      "Prayer renewal (4)",
+      "Spider venom"
+    ]
+  },
+  "Supreme attack potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Attack level of 16%+4.",
+    "ingredients": [
+      "Extreme attack (4)",
+      "Super attack (4)",
+      "Crystal flask"
+    ]
+  },
+  "Supreme strength potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Strength level of 16%+4.",
+    "ingredients": [
+      "Extreme strength (4)",
+      "Super strength (4)",
+      "Crystal flask"
+    ]
+  },
+  "Supreme defence potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Defence level of 16%+4.",
+    "ingredients": [
+      "Extreme defence (4)",
+      "Super defence (4)",
+      "Crystal flask"
+    ]
+  },
+  "Supreme ranging potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Ranged level of 16%+4.",
+    "ingredients": [
+      "Extreme ranging (4)",
+      "Super ranging potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Supreme magic potion (6)": {
+    "level": 93,
+    "effect": "Temporary boost to Magic level of 16%+4.",
+    "ingredients": [
+      "Extreme magic (4)",
+      "Super magic potion (4)",
+      "Crystal flask"
+    ]
+  },
+  "Supreme overload potion (6)": {
+    "level": 98,
+    "effect": "Temporary boost to Attack, Strength, Ranged, Magic, Defence, and Necromancy level of 16%+4. The boost is reapplied every 15 seconds.",
+    "ingredients": [
+      "Overload (4)",
+      "Super attack (4)",
+      "Super strength (4)",
+      "Super defence (4)",
+      "Super ranging (4)",
+      "Super magic (4)",
+      "Super necromancy (4)",
+      "Crystal flask also needed"
+    ]
+  },
+  "Supreme overload salve (6)": {
+    "level": 99,
+    "effect": "Temporary boost to Attack, Strength, Ranged, Magic, Defence, and Necromancy level of 16%+4. The boost is reapplied every 15 seconds. Restores 555 Prayer points and protects from dragonfire, and wyvern breath over the course of 6 minutes and reduces poison damage for 346 seconds.",
+    "ingredients": [
+      "Supreme overload potion (6)",
+      "Super antifire (4)",
+      "Antifire (4)",
+      "Prayer renewal (4)",
+      "Prayer potion (4)",
+      "Super antipoison (4)",
+      "Crystal flask"
+    ]
+  },
+  "Elder overload potion (6)": {
+    "level": 106,
+    "effect": "Boosts Attack, Strength, Ranged, Magic, Defence, and Necromancy by 17% of the stat level + 5 for 6 minutes. The boost is reapplied every 15 seconds.",    "ingredients": [
+      "Supreme overload potion (6)",
+      "Primal extract",
+      "Clean fellstalk",
+      "Crystal flask",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Elder overload salve #1 (6)": {
+    "level": 107,
+    "effect": "Boosts Attack, Strength, Ranged, Magic, Defence, and Necromancy by 17% of the stat level + 5 for 6 minutes. The boost is reapplied every 15 seconds. At 99 prayer it restores 317 prayer points instantly and 595 prayer points over time. It protects from dragonfire and wyvern breath. It also reduces poison damage for 346 seconds.",
+    "ingredients": [
+      "Elder overload potion (6)",
+      "Prayer renewal (4)",
+      "Prayer potion (4)",
+      "Super antipoison (4)",
+      "Antifire (4)",
+      "Super antifire (4)",
+      "Crystal flask"
+    ]
+  },
+  "Elder overload salve #2 (6)": {
+    "level": 107,
+    "effect": "Boosts Attack, Strength, Ranged, Magic, Defence, and Necromancy by 17% of the stat level + 5 for 6 minutes. The boost is reapplied every 15 seconds. At 99 prayer it restores 317 prayer points instantly and 595 prayer points over time. It protects from dragonfire and wyvern breath. It also reduces poison damage for 346 seconds.",
+    "ingredients": [
+      "Supreme overload salve (6)",
+      "Primal extract",
+      "Clean fellstalk",
+      "Crystal flask",
+      "Primal extract can be made by combining a primal fruit pulp with one, two or three empty vials 90 Herblore: 1 primal extract per primal fruit pulp. 102 Herblore: 2 primal extract per primal fruit pulp. 112 Herblore: 3 primal extract per primal fruit pulp."
+    ]
+  },
+  "Replenishment potion (6)": {
+    "level": 87,
+    "effect": "Regain 25% adrenaline, restores all skills by 25%+8, and restores 25%+80 Prayer points.",
+    "ingredients": [
+      "Adrenaline potion (4)",
+      "Super restore (4)",
+      "Crystal flask"
+    ]
+  },
+  "Enhanced replenishment potion (6)": {
+    "level": 90,
+    "effect": "Regain 30% adrenaline, restores all skills and Summoning points by 25%+8, and restores 25%+80 Prayer points.",
+    "ingredients": [
+      "Replenishment potion (6)",
+      "Adrenaline crystal",
+      "Crystal flask"
+    ]
+  },
+  "Wyrmfire potion (6)": {
+    "level": 89,
+    "effect": "Complete protection from dragon and wyvern fire for 6 minutes.",
+    "ingredients": [
+      "Super antifire (4)",
+      "Antifire (4)",
+      "Crystal flask"
+    ]
+  },
+  "Brightfire potion (6)": {
+    "level": 94,
+    "effect": "Restores 545 Prayer points over time and completely protects against dragon fire for 6 minutes.",
+    "ingredients": [
+      "Prayer renewal (4)",
+      "Super antifire (4)",
+      "Crystal flask"
+    ]
+  },
+  "Perfect plus potion (6)": {
+    "level": 99,
+    "effect": "Gives the effect of all the perfect juju potions over a period of 4 hours. Does not affect combat stats.",
+    "ingredients": [
+      "Overload (3)",
+      "Harmony moss",
+      "Crystal tree blossom",
+      "Crystal flask"
+    ]
+  },
+  "Spiritual prayer potion (6)": {
+    "level": 110,
+    "effect": "Combines the effects of a prayer potion and a summoning potion.",
+    "ingredients": [
+      "Primal extract",
+      "Prayer potion (4)",
+      "Summoning potion (4)",
+      "Crystal flask"
+    ]
+  }
+}
+
+        function search() {
+            const searchType = document.getElementById('searchType').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const resultDiv = document.getElementById('result');
+            if (searchTerm === '') {
+        // Clear the results div if the search term is empty
+        resultDiv.innerHTML = '';
+        return;
+    }
+            let matchedPotions = [];
+            
+            for (let [potion, info] of Object.entries(potions)) {
+                if (searchType === 'potion' && potion.toLowerCase().includes(searchTerm)) {
+                    matchedPotions.push({ name: potion, info: info });
+                } else if (searchType === 'ingredient' && info.ingredients.some(ing => ing.toLowerCase().includes(searchTerm))) {
+                    matchedPotions.push({ name: potion, info: info });
+                }
+            }
+            
+            if (matchedPotions.length > 0) {
+                resultDiv.innerHTML = matchedPotions.map(match => `
+                    <h2>${match.name}</h2>
+                    <p><strong>Level:</strong> ${match.info.level}</p>
+                    <p><strong>Effect:</strong> ${match.info.effect}</p>
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        ${match.info.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    </ul>
+                    <hr class="custom-hr">
+                `).join('');
+            } else {
+                resultDiv.innerHTML = "<p>No matches found.</p>";
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', search);
+        document.getElementById('searchType').addEventListener('change', search);
+    </script>
+</body>
+</html>

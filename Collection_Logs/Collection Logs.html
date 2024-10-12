@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/Collection_Logs/openboss.js" defer></script>
+  <link rel="stylesheet" href="/Collection_Logs/collection.css" media="screen">
+  <title>Seda's Collection Logs</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: rgba(78, 113, 117, 0.979);
+    }
+  </style>
+</head>
+<body>
+  <div class="sidenav">
+    <a href="/index.html">Main Page</a>
+    <a href="/Ports/ports.html">Ports Calc</a>
+    <a href="/Potions/potions.html">Potions Lookup</a>
+    
+  </div>
+
+  <div class="bosstab">
+    <button class="bosslinks" data-boss="Abomination">Abomination</button>
+    <button class="bosslinks" data-boss="Araxxi">Araxxi</button>
+    <button class="bosslinks" data-boss="Arch-Glacor">Arch-Glacor</button>
+    <button class="bosslinks" data-boss="The-Barrows-Brothers">The Barrows Brothers</button>
+    <button class="bosslinks" data-boss="The-Barrows:-Rise-of-the-Six">The Barrows: Rise of the Six</button>
+    <button class="bosslinks" data-boss="Chaos-Elemental">Chaos Elemental</button>
+    <button class="bosslinks" data-boss="Commander-Zilyana">Commander Zilyana</button>
+    <button class="bosslinks" data-boss="Corporael-Beast">Corporael Beast</button>
+    <button class="bosslinks" data-boss="Croesus">Croesus</button>
+    <button class="bosslinks" data-boss="Dagannoth-Kings">Dagannoth Kings</button>
+    <button class="bosslinks" data-boss="Dragonkin-Laboratory">Dragonkin Laboratory</button>
+    <button class="bosslinks" data-boss="General-Graardor">General Graardor</button>
+    <button class="bosslinks" data-boss="Giant-Mole">Giant Mole</button>
+    <button class="bosslinks" data-boss="Gregorovic">Gregorovic</button>
+    <button class="bosslinks" data-boss="Helwyr">Helwyr</button>
+    <button class="bosslinks" data-boss="Hermod,-the-Spirit-of-War">Hermod, the Spirit of War</button>
+    <button class="bosslinks" data-boss="Kalphite-King">Kalphite King</button>
+    <button class="bosslinks" data-boss="Kalphite-Queen">Kalphite Queen</button>
+    <button class="bosslinks" data-boss="Kerapac">Kerapac</button>
+    <button class="bosslinks" data-boss="King-Black-Dragon">King Black Dragon</button>
+    <button class="bosslinks" data-boss="Kree'arra">Kree'arra</button>
+    <button class="bosslinks" data-boss="K'ril-Tsutsaroth">K'ril Tsutsaroth</button>
+    <button class="bosslinks" data-boss="Legiones">Legiones</button>
+    <button class="bosslinks" data-boss="Liberation-of-Mazcab">Liberation of Mazcab</button>
+    <button class="bosslinks" data-boss="The-Magister">The Magister</button>
+    <button class="bosslinks" data-boss="Nex">Nex</button>
+    <button class="bosslinks" data-boss="Nex---Angel-of-Death">Nex - Angel of Death</button>
+    <button class="bosslinks" data-boss="Queen-Black-Dragon">Queen Black Dragon</button>
+    <button class="bosslinks" data-boss="Raksha">Raksha</button>
+    <button class="bosslinks" data-boss="Rasial,-the-First-Necromancer">Rasial, the First Necromancer</button>
+    <button class="bosslinks" data-boss="Rex-Matriarchs">Rex Matriarchs</button>
+    <button class="bosslinks" data-boss="The-Shadow-Reef">The Shadow Reef</button>
+    <button class="bosslinks" data-boss="Solak">Solak</button>
+    <button class="bosslinks" data-boss="Telos">Telos</button>
+    <button class="bosslinks" data-boss="Temple-of-Aminishi">Temple of Aminishi</button>
+    <button class="bosslinks" data-boss="The-Twin-Furies">The Twin Furies</button>
+    <button class="bosslinks" data-boss="TzHaar">TzHaar</button>
+    <button class="bosslinks" data-boss="TzKal-Zuk">TzKal-Zuk</button>
+    <button class="bosslinks" data-boss="TzTok-Jad-and-Har-Aken">TzTok-Jad and Har-Aken</button>
+    <button class="bosslinks" data-boss="Vindicta-&-Gorvek">Vindicta & Gorvek</button>
+    <button class="bosslinks" data-boss="Vorago">Vorago</button>
+    <button class="bosslinks" data-boss="Zamorak,-Lord-of-Chaos">Zamorak, Lord of Chaos</button>
+    <button class="bosslinks" data-boss="Zemouregal-&-Vorkath">Zemouregal & Vorkath</button>
+    <button class="bosslinks" data-boss="Sanctum-of-Rebirth">Sanctum of Rebirth</button>
+    <button class="bosslinks" data-boss="The-Gate-of-Elidinis">The Gate of Elidinis</button>
+  </div>
+  
+      <div id="Abomination" class="tabcontent">
+        <h2>Abomination</h2>
+        <button class="subtab" data-item="Abomination cape">Abomination cape</button>
+      <button class="subtab" data-item="Dragon full helm">Dragon full helm</button>
+      </div>
+  
+      <div id="Araxxi" class="tabcontent">
+        <h2>Araxxi</h2>
+        <button class="subtab" data-item="Spider leg top">Spider leg top</button>
+      <button class="subtab" data-item="Spider leg middle">Spider leg middle</button>
+      <button class="subtab" data-item="Spider leg bottom">Spider leg bottom</button>
+      <button class="subtab" data-item="Araxxi's fang">Araxxi's fang</button>
+      <button class="subtab" data-item="Araxxi's eye">Araxxi's eye</button>
+      <button class="subtab" data-item="Araxxi's web">Araxxi's web</button>
+      <button class="subtab" data-item="Araxyte pheromone">Araxyte pheromone</button>
+      <button class="subtab" data-item="Bill (pet)">Bill (pet)</button>
+      <button class="subtab" data-item="Lana">Lana</button>
+      <button class="subtab" data-item="Pete">Pete</button>
+      <button class="subtab" data-item="Dave">Dave</button>
+      <button class="subtab" data-item="Steve">Steve</button>
+      <button class="subtab" data-item="Gavin">Gavin</button>
+      <button class="subtab" data-item="Barry">Barry</button>
+      <button class="subtab" data-item="Mallory">Mallory</button>
+      </div>
+  
+      <div id="Arch-Glacor" class="tabcontent">
+        <h2>Arch-Glacor</h2>
+        <button class="subtab" data-item="Glacor remnants">Glacor remnants</button>
+      <button class="subtab" data-item="Dark nilas">Dark nilas</button>
+      <button class="subtab" data-item="Frozen core of Leng">Frozen core of Leng</button>
+      <button class="subtab" data-item="Leng artefact">Leng artefact</button>
+      <button class="subtab" data-item="Dark ice shard">Dark ice shard</button>
+      <button class="subtab" data-item="Dark Shard of Leng">Dark Shard of Leng</button>
+      <button class="subtab" data-item="Dark ice sliver">Dark ice sliver</button>
+      <button class="subtab" data-item="Dark Sliver of Leng">Dark Sliver of Leng</button>
+      <button class="subtab" data-item="Scripture of Wen">Scripture of Wen</button>
+      <button class="subtab" data-item="Glacor's Adornment">Glacor's Adornment</button>
+      <button class="subtab" data-item="Arch-Glacor's Adornment">Arch-Glacor's Adornment</button>
+      <button class="subtab" data-item="Ur-Glacor's Adornment">Ur-Glacor's Adornment</button>
+      <button class="subtab" data-item="Gladys">Gladys</button>
+      <button class="subtab" data-item="Arch-Gladys">Arch-Gladys</button>
+      </div>
+  
+      <div id="The-Barrows-Brothers" class="tabcontent">
+        <h2>The Barrows Brothers</h2>
+        <button class="subtab" data-item="Corruption sigil">Corruption sigil</button>
+      <button class="subtab" data-item="Ahrim's hood">Ahrim's hood</button>
+      <button class="subtab" data-item="Ahrim's robe top">Ahrim's robe top</button>
+      <button class="subtab" data-item="Ahrim's robe skirt">Ahrim's robe skirt</button>
+      <button class="subtab" data-item="Ahrim's staff">Ahrim's staff</button>
+      <button class="subtab" data-item="Ahrim's wand">Ahrim's wand</button>
+      <button class="subtab" data-item="Ahrim's book of magic">Ahrim's book of magic</button>
+      <button class="subtab" data-item="Akrisae's hood">Akrisae's hood</button>
+      <button class="subtab" data-item="Akrisae's robe top">Akrisae's robe top</button>
+      <button class="subtab" data-item="Akrisae's robe skirt">Akrisae's robe skirt</button>
+      <button class="subtab" data-item="Akrisae's war mace">Akrisae's war mace</button>
+      <button class="subtab" data-item="Dharok's helm">Dharok's helm</button>
+      <button class="subtab" data-item="Dharok's platebody">Dharok's platebody</button>
+      <button class="subtab" data-item="Dharok's platelegs">Dharok's platelegs</button>
+      <button class="subtab" data-item="Dharok's greataxe">Dharok's greataxe</button>
+      <button class="subtab" data-item="Guthan's helm">Guthan's helm</button>
+      <button class="subtab" data-item="Guthan's platebody">Guthan's platebody</button>
+      <button class="subtab" data-item="Guthan's chainskirt">Guthan's chainskirt</button>
+      <button class="subtab" data-item="Guthan's warspear">Guthan's warspear</button>
+      <button class="subtab" data-item="Karil's coif">Karil's coif</button>
+      <button class="subtab" data-item="Karil's top">Karil's top</button>
+      <button class="subtab" data-item="Karil's skirt">Karil's skirt</button>
+      <button class="subtab" data-item="Karil's crossbow">Karil's crossbow</button>
+      <button class="subtab" data-item="Karil's pistol crossbow">Karil's pistol crossbow</button>
+      <button class="subtab" data-item="Karil's off-hand pistol crossbow">Karil's off-hand pistol crossbow</button>
+      <button class="subtab" data-item="Torag's helm">Torag's helm</button>
+      <button class="subtab" data-item="Torag's platebody">Torag's platebody</button>
+      <button class="subtab" data-item="Torag's platelegs">Torag's platelegs</button>
+      <button class="subtab" data-item="Torag's hammer">Torag's hammer</button>
+      <button class="subtab" data-item="Verac's helm">Verac's helm</button>
+      <button class="subtab" data-item="Verac's brassard">Verac's brassard</button>
+      <button class="subtab" data-item="Verac's plateskirt">Verac's plateskirt</button>
+      <button class="subtab" data-item="Verac's flail">Verac's flail</button>
+      <button class="subtab" data-item="Linza's helm">Linza's helm</button>
+      <button class="subtab" data-item="Linza's cuirass">Linza's cuirass</button>
+      <button class="subtab" data-item="Linza's greaves">Linza's greaves</button>
+      <button class="subtab" data-item="Linza's hammer">Linza's hammer</button>
+      <button class="subtab" data-item="Linza's shield">Linza's shield</button>
+      <button class="subtab" data-item="Amulet of the forsaken">Amulet of the forsaken</button>
+      </div>
+  
+      <div id="The-Barrows:-Rise-of-the-Six" class="tabcontent">
+        <h2>The Barrows: Rise of the Six</h2>
+        <button class="subtab" data-item="Malevolent kiteshield">Malevolent kiteshield</button>
+      <button class="subtab" data-item="Merciless kiteshield">Merciless kiteshield</button>
+      <button class="subtab" data-item="Vengeful kiteshield">Vengeful kiteshield</button>
+      <button class="subtab" data-item="Malevolent energy">Malevolent energy</button>
+      <button class="subtab" data-item="Ahrim bobblehead">Ahrim bobblehead</button>
+      <button class="subtab" data-item="Dharok bobblehead">Dharok bobblehead</button>
+      <button class="subtab" data-item="Guthan bobblehead">Guthan bobblehead</button>
+      <button class="subtab" data-item="Karil bobblehead">Karil bobblehead</button>
+      <button class="subtab" data-item="Torag bobblehead">Torag bobblehead</button>
+      <button class="subtab" data-item="Verac bobblehead">Verac bobblehead</button>
+      </div>
+  
+      <div id="Chaos-Elemental" class="tabcontent">
+        <h2>Chaos Elemental</h2>
+        <button class="subtab" data-item="Dragon 2h sword">Dragon 2h sword</button>
+      <button class="subtab" data-item="Corrupt dragon helm">Corrupt dragon helm</button>
+      <button class="subtab" data-item="Corrupt dragon chainbody">Corrupt dragon chainbody</button>
+      <button class="subtab" data-item="Corrupt dragon platelegs">Corrupt dragon platelegs</button>
+      <button class="subtab" data-item="Corrupt dragon plateskirt">Corrupt dragon plateskirt</button>
+      <button class="subtab" data-item="Corrupt dragon battleaxe">Corrupt dragon battleaxe</button>
+      <button class="subtab" data-item="Corrupt dragon dagger">Corrupt dragon dagger</button>
+      <button class="subtab" data-item="Corrupt dragon longsword">Corrupt dragon longsword</button>
+      <button class="subtab" data-item="Corrupt dragon scimitar">Corrupt dragon scimitar</button>
+      <button class="subtab" data-item="Corrupt dragon spear">Corrupt dragon spear</button>
+      <button class="subtab" data-item="Corrupt dragon sq shield">Corrupt dragon sq shield</button>
+      <button class="subtab" data-item="Statius's full helm">Statius's full helm</button>
+      <button class="subtab" data-item="Statius's platebody">Statius's platebody</button>
+      <button class="subtab" data-item="Statius's platelegs">Statius's platelegs</button>
+      <button class="subtab" data-item="Statius's warhammer">Statius's warhammer</button>
+      <button class="subtab" data-item="Vesta's chainbody">Vesta's chainbody</button>
+      <button class="subtab" data-item="Vesta's plateskirt">Vesta's plateskirt</button>
+      <button class="subtab" data-item="Vesta's longsword">Vesta's longsword</button>
+      <button class="subtab" data-item="Vesta's spear">Vesta's spear</button>
+      <button class="subtab" data-item="Zuriel's hood">Zuriel's hood</button>
+      <button class="subtab" data-item="Zuriel's robe top">Zuriel's robe top</button>
+      <button class="subtab" data-item="Zuriel's robe bottom">Zuriel's robe bottom</button>
+      <button class="subtab" data-item="Zuriel's staff">Zuriel's staff</button>
+      <button class="subtab" data-item="Morrigan's coif">Morrigan's coif</button>
+      <button class="subtab" data-item="Morrigan's leather body">Morrigan's leather body</button>
+      <button class="subtab" data-item="Morrigan's leather chaps">Morrigan's leather chaps</button>
+      <button class="subtab" data-item="Morrigan's javelin">Morrigan's javelin</button>
+      <button class="subtab" data-item="Morrigan's throwing axe">Morrigan's throwing axe</button>
+      <button class="subtab" data-item="Ellie">Ellie</button>
+      </div>
+  
+      <div id="Commander-Zilyana" class="tabcontent">
+        <h2>Commander Zilyana</h2>
+        <button class="subtab" data-item="Saradomin's hiss">Saradomin's hiss</button>
+      <button class="subtab" data-item="Saradomin's murmur">Saradomin's murmur</button>
+      <button class="subtab" data-item="Saradomin's whisper">Saradomin's whisper</button>
+      <button class="subtab" data-item="Saradomin hilt">Saradomin hilt</button>
+      <button class="subtab" data-item="Godsword shard 1">Godsword shard 1</button>
+      <button class="subtab" data-item="Godsword shard 2">Godsword shard 2</button>
+      <button class="subtab" data-item="Godsword shard 3">Godsword shard 3</button>
+      <button class="subtab" data-item="Saradomin sword">Saradomin sword</button>
+      <button class="subtab" data-item="Armadyl crossbow">Armadyl crossbow</button>
+      <button class="subtab" data-item="Off-hand Armadyl crossbow">Off-hand Armadyl crossbow</button>
+      <button class="subtab" data-item="Warpriest of Saradomin helm">Warpriest of Saradomin helm</button>
+      <button class="subtab" data-item="Warpriest of Saradomin cape">Warpriest of Saradomin cape</button>
+      <button class="subtab" data-item="Warpriest of Saradomin cuirass">Warpriest of Saradomin cuirass</button>
+      <button class="subtab" data-item="Warpriest of Saradomin greaves">Warpriest of Saradomin greaves</button>
+      <button class="subtab" data-item="Warpriest of Saradomin gauntlets">Warpriest of Saradomin gauntlets</button>
+      <button class="subtab" data-item="Warpriest of Saradomin boots">Warpriest of Saradomin boots</button>
+      <button class="subtab" data-item="Zilyana's Notes">Zilyana's Notes</button>
+      <button class="subtab" data-item="Commander Miniana">Commander Miniana</button>
+      <button class="subtab" data-item="Saradominist soulstone">Saradominist soulstone</button>
+      </div>
+  
+      <div id="Corporael-Beast" class="tabcontent">
+        <h2>Corporael Beast</h2>
+        <button class="subtab" data-item="Spirit shield">Spirit shield</button>
+      <button class="subtab" data-item="Spectral sigil">Spectral sigil</button>
+      <button class="subtab" data-item="Arcane sigil">Arcane sigil</button>
+      <button class="subtab" data-item="Elysian sigil">Elysian sigil</button>
+      <button class="subtab" data-item="Divine sigil">Divine sigil</button>
+      <button class="subtab" data-item="Holy elixir">Holy elixir</button>
+      <button class="subtab" data-item="Corporeal Puppy">Corporeal Puppy</button>
+      </div>
+  
+      <div id="Croesus" class="tabcontent">
+        <h2>Croesus</h2>
+        <button class="subtab" data-item="Cryptbloom helm (incomplete)">Cryptbloom helm (incomplete)</button>
+      <button class="subtab" data-item="Cryptbloom top (incomplete)">Cryptbloom top (incomplete)</button>
+      <button class="subtab" data-item="Cryptbloom bottoms (incomplete)">Cryptbloom bottoms (incomplete)</button>
+      <button class="subtab" data-item="Cryptbloom gloves (incomplete)">Cryptbloom gloves (incomplete)</button>
+      <button class="subtab" data-item="Cryptbloom boots (incomplete)">Cryptbloom boots (incomplete)</button>
+      <button class="subtab" data-item="Croesus sporehammer">Croesus sporehammer</button>
+      <button class="subtab" data-item="Croesus foultorch">Croesus foultorch</button>
+      <button class="subtab" data-item="Croesus spore sack">Croesus spore sack</button>
+      <button class="subtab" data-item="Scripture of Bik">Scripture of Bik</button>
+      <button class="subtab" data-item="Little Sus">Little Sus</button>
+      <button class="subtab" data-item="Little Sus (Purple)">Little Sus (Purple)</button>
+      </div>
+  
+      <div id="Dagannoth-Kings" class="tabcontent">
+        <h2>Dagannoth Kings</h2>
+        <button class="subtab" data-item="Seers' ring">Seers' ring</button>
+      <button class="subtab" data-item="Berserker ring">Berserker ring</button>
+      <button class="subtab" data-item="Warrior ring">Warrior ring</button>
+      <button class="subtab" data-item="Archers' ring">Archers' ring</button>
+      <button class="subtab" data-item="Mud battlestaff">Mud battlestaff</button>
+      <button class="subtab" data-item="Dragon hatchet">Dragon hatchet</button>
+      <button class="subtab" data-item="Seercull">Seercull</button>
+      <button class="subtab" data-item="Prime hatchling">Prime hatchling</button>
+      <button class="subtab" data-item="Rex hatchling">Rex hatchling</button>
+      <button class="subtab" data-item="Supreme hatchling">Supreme hatchling</button>
+      </div>
+  
+      <div id="Dragonkin-Laboratory" class="tabcontent">
+        <h2>Dragonkin Laboratory</h2>
+        <button class="subtab" data-item="Draconic energy">Draconic energy</button>
+      <button class="subtab" data-item="Redacted Dragonkin Research">Redacted Dragonkin Research</button>
+      <button class="subtab" data-item="Diary of an Overzealous Gnome">Diary of an Overzealous Gnome</button>
+      <button class="subtab" data-item="Greater Fury ability codex">Greater Fury ability codex</button>
+      <button class="subtab" data-item="Greater Flurry ability codex">Greater Flurry ability codex</button>
+      <button class="subtab" data-item="Greater Barge ability codex">Greater Barge ability codex</button>
+      <button class="subtab" data-item="Bisdi">Bisdi</button>
+      </div>
+  
+      <div id="General-Graardor" class="tabcontent">
+        <h2>General Graardor</h2>
+        <button class="subtab" data-item="Bandos helmet">Bandos helmet</button>
+      <button class="subtab" data-item="Bandos chestplate">Bandos chestplate</button>
+      <button class="subtab" data-item="Bandos tassets">Bandos tassets</button>
+      <button class="subtab" data-item="Bandos gloves">Bandos gloves</button>
+      <button class="subtab" data-item="Bandos boots">Bandos boots</button>
+      <button class="subtab" data-item="Bandos hilt">Bandos hilt</button>
+      <button class="subtab" data-item="Godsword shard 1">Godsword shard 1</button>
+      <button class="subtab" data-item="Godsword shard 2">Godsword shard 2</button>
+      <button class="subtab" data-item="Godsword shard 3">Godsword shard 3</button>
+      <button class="subtab" data-item="Bandos warshield">Bandos warshield</button>
+      <button class="subtab" data-item="Warpriest of Bandos helm">Warpriest of Bandos helm</button>
+      <button class="subtab" data-item="Warpriest of Bandos cape">Warpriest of Bandos cape</button>
+      <button class="subtab" data-item="Warpriest of Bandos cuirass">Warpriest of Bandos cuirass</button>
+      <button class="subtab" data-item="Warpriest of Bandos greaves">Warpriest of Bandos greaves</button>
+      <button class="subtab" data-item="Warpriest of Bandos gauntlets">Warpriest of Bandos gauntlets</button>
+      <button class="subtab" data-item="Warpriest of Bandos boots">Warpriest of Bandos boots</button>
+      <button class="subtab" data-item="The Glory of General Graardor">The Glory of General Graardor</button>
+      <button class="subtab" data-item="General Awwdor">General Awwdor</button>
+      <button class="subtab" data-item="Bandosian soulstone">Bandosian soulstone</button>
+      </div>
+  
+      <div id="Giant-Mole" class="tabcontent">
+        <h2>Giant Mole</h2>
+        <button class="subtab" data-item="Dragon 2h sword">Dragon 2h sword</button>
+      <button class="subtab" data-item="Clingy mole">Clingy mole</button>
+      <button class="subtab" data-item="Molly">Molly</button>
+      </div>
+  
+      <div id="Gregorovic" class="tabcontent">
+        <h2>Gregorovic</h2>
+        <button class="subtab" data-item="Crest of Sliske">Crest of Sliske</button>
+      <button class="subtab" data-item="Dormant anima core helm">Dormant anima core helm</button>
+      <button class="subtab" data-item="Dormant anima core body">Dormant anima core body</button>
+      <button class="subtab" data-item="Dormant anima core legs">Dormant anima core legs</button>
+      <button class="subtab" data-item="Sliskean essence">Sliskean essence</button>
+      <button class="subtab" data-item="Shadow glaive">Shadow glaive</button>
+      <button class="subtab" data-item="Off-hand shadow glaive">Off-hand shadow glaive</button>
+      <button class="subtab" data-item="Greg">Greg</button>
+      </div>
+  
+      <div id="Helwyr" class="tabcontent">
+        <h2>Helwyr</h2>
+        <button class="subtab" data-item="Crest of Seren">Crest of Seren</button>
+      <button class="subtab" data-item="Dormant anima core helm">Dormant anima core helm</button>
+      <button class="subtab" data-item="Dormant anima core body">Dormant anima core body</button>
+      <button class="subtab" data-item="Dormant anima core legs">Dormant anima core legs</button>
+      <button class="subtab" data-item="Serenic essence">Serenic essence</button>
+      <button class="subtab" data-item="Wand of the Cywir elders">Wand of the Cywir elders</button>
+      <button class="subtab" data-item="Orb of the Cywir elders">Orb of the Cywir elders</button>
+      <button class="subtab" data-item="Lilwyr">Lilwyr</button>
+      </div>
+  
+      <div id="Hermod,-the-Spirit-of-War" class="tabcontent">
+        <h2>Hermod, the Spirit of War</h2>
+        <button class="subtab" data-item="Hermodic plate">Hermodic plate</button>
+      <button class="subtab" data-item="Animated drumsticks">Animated drumsticks</button>
+      <button class="subtab" data-item="Herman">Herman</button>
+      </div>
+  
+      <div id="Kalphite-King" class="tabcontent">
+        <h2>Kalphite King</h2>
+        <button class="subtab" data-item="Drygore longsword">Drygore longsword</button>
+      <button class="subtab" data-item="Off-hand drygore longsword">Off-hand drygore longsword</button>
+      <button class="subtab" data-item="Drygore mace">Drygore mace</button>
+      <button class="subtab" data-item="Off-hand drygore mace">Off-hand drygore mace</button>
+      <button class="subtab" data-item="Drygore rapier">Drygore rapier</button>
+      <button class="subtab" data-item="Off-hand drygore rapier">Off-hand drygore rapier</button>
+      <button class="subtab" data-item="Perfect chitin">Perfect chitin</button>
+      <button class="subtab" data-item="Kalphite Grubling">Kalphite Grubling</button>
+      </div>
+  
+      <div id="Kalphite-Queen" class="tabcontent">
+        <h2>Kalphite Queen</h2>
+        <button class="subtab" data-item="Dragon chainbody">Dragon chainbody</button>
+      <button class="subtab" data-item="Dragon 2h sword">Dragon 2h sword</button>
+      <button class="subtab" data-item="Kalphite queen head">Kalphite queen head</button>
+      <button class="subtab" data-item="Kalphite Grublet">Kalphite Grublet</button>
+      </div>
+  
+      <div id="Kerapac" class="tabcontent">
+        <h2>Kerapac</h2>
+        <button class="subtab" data-item="Fractured Armadyl symbol">Fractured Armadyl symbol</button>
+      <button class="subtab" data-item="Fractured stabilisation gem">Fractured stabilisation gem</button>
+      <button class="subtab" data-item="Staff of Armadyl's fractured shaft">Staff of Armadyl's fractured shaft</button>
+      <button class="subtab" data-item="Kerapac's wrist wraps">Kerapac's wrist wraps</button>
+      <button class="subtab" data-item="Greater Concentrated blast ability codex">Greater Concentrated blast ability codex</button>
+      <button class="subtab" data-item="Scripture of Jas">Scripture of Jas</button>
+      <button class="subtab" data-item="Kerry">Kerry</button>
+      <button class="subtab" data-item="Echo Of Kerapac">Echo Of Kerapac</button>
+      </div>
+  
+      <div id="King-Black-Dragon" class="tabcontent">
+        <h2>King Black Dragon</h2>
+        <button class="subtab" data-item="Dragon Rider gloves">Dragon Rider gloves</button>
+      <button class="subtab" data-item="Dragon Rider boots">Dragon Rider boots</button>
+      <button class="subtab" data-item="Draconic visage">Draconic visage</button>
+      <button class="subtab" data-item="King black dragon head">King black dragon head</button>
+      <button class="subtab" data-item="Last riders">Last riders</button>
+      <button class="subtab" data-item="Dragon kite ornament kit (or)">Dragon kite ornament kit (or)</button>
+      <button class="subtab" data-item="Dragon kite ornament kit (sp)">Dragon kite ornament kit (sp)</button>
+      <button class="subtab" data-item="King Black Dragonling">King Black Dragonling</button>
+      </div>
+  
+      <div id="Kree'arra" class="tabcontent">
+        <h2>Kree'arra</h2>
+        <button class="subtab" data-item="Armadyl helmet">Armadyl helmet</button>
+      <button class="subtab" data-item="Armadyl chestplate">Armadyl chestplate</button>
+      <button class="subtab" data-item="Armadyl chainskirt">Armadyl chainskirt</button>
+      <button class="subtab" data-item="Armadyl gloves">Armadyl gloves</button>
+      <button class="subtab" data-item="Armadyl boots">Armadyl boots</button>
+      <button class="subtab" data-item="Armadyl hilt">Armadyl hilt</button>
+      <button class="subtab" data-item="Godsword shard 1">Godsword shard 1</button>
+      <button class="subtab" data-item="Godsword shard 2">Godsword shard 2</button>
+      <button class="subtab" data-item="Godsword shard 3">Godsword shard 3</button>
+      <button class="subtab" data-item="Armadyl buckler">Armadyl buckler</button>
+      <button class="subtab" data-item="Warpriest of Armadyl helm">Warpriest of Armadyl helm</button>
+      <button class="subtab" data-item="Warpriest of Armadyl cape">Warpriest of Armadyl cape</button>
+      <button class="subtab" data-item="Warpriest of Armadyl cuirass">Warpriest of Armadyl cuirass</button>
+      <button class="subtab" data-item="Warpriest of Armadyl greaves">Warpriest of Armadyl greaves</button>
+      <button class="subtab" data-item="Warpriest of Armadyl gauntlets">Warpriest of Armadyl gauntlets</button>
+      <button class="subtab" data-item="Warpriest of Armadyl boots">Warpriest of Armadyl boots</button>
+      <button class="subtab" data-item="Armadyl's Assault">Armadyl's Assault</button>
+      <button class="subtab" data-item="Chick'arra">Chick'arra</button>
+      <button class="subtab" data-item="Armadylean soulstone">Armadylean soulstone</button>
+      </div>
+  
+      <div id="K'ril-Tsutsaroth" class="tabcontent">
+        <h2>K'ril Tsutsaroth</h2>
+        <button class="subtab" data-item="Hood of subjugation">Hood of subjugation</button>
+      <button class="subtab" data-item="Garb of subjugation">Garb of subjugation</button>
+      <button class="subtab" data-item="Gown of subjugation">Gown of subjugation</button>
+      <button class="subtab" data-item="Gloves of subjugation">Gloves of subjugation</button>
+      <button class="subtab" data-item="Boots of subjugation">Boots of subjugation</button>
+      <button class="subtab" data-item="Zamorak hilt">Zamorak hilt</button>
+      <button class="subtab" data-item="Godsword shard 1">Godsword shard 1</button>
+      <button class="subtab" data-item="Godsword shard 2">Godsword shard 2</button>
+      <button class="subtab" data-item="Godsword shard 3">Godsword shard 3</button>
+      <button class="subtab" data-item="Zamorakian spear">Zamorakian spear</button>
+      <button class="subtab" data-item="Steam battlestaff">Steam battlestaff</button>
+      <button class="subtab" data-item="Ward of subjugation">Ward of subjugation</button>
+      <button class="subtab" data-item="Warpriest of Zamorak helm">Warpriest of Zamorak helm</button>
+      <button class="subtab" data-item="Warpriest of Zamorak cape">Warpriest of Zamorak cape</button>
+      <button class="subtab" data-item="Warpriest of Zamorak cuirass">Warpriest of Zamorak cuirass</button>
+      <button class="subtab" data-item="Warpriest of Zamorak greaves">Warpriest of Zamorak greaves</button>
+      <button class="subtab" data-item="Warpriest of Zamorak gauntlets">Warpriest of Zamorak gauntlets</button>
+      <button class="subtab" data-item="Warpriest of Zamorak boots">Warpriest of Zamorak boots</button>
+      <button class="subtab" data-item="Razulei's Tale">Razulei's Tale</button>
+      <button class="subtab" data-item="K'ril Tinyroth">K'ril Tinyroth</button>
+      <button class="subtab" data-item="Zamorakian soulstone">Zamorakian soulstone</button>
+      </div>
+  
+      <div id="Legiones" class="tabcontent">
+        <h2>Legiones</h2>
+        <button class="subtab" data-item="Ascension signet I">Ascension signet I</button>
+      <button class="subtab" data-item="Ascension signet II">Ascension signet II</button>
+      <button class="subtab" data-item="Ascension signet III">Ascension signet III</button>
+      <button class="subtab" data-item="Ascension signet IV">Ascension signet IV</button>
+      <button class="subtab" data-item="Ascension signet V">Ascension signet V</button>
+      <button class="subtab" data-item="Ascension signet VI">Ascension signet VI</button>
+      <button class="subtab" data-item="Legio Primulus">Legio Primulus</button>
+      <button class="subtab" data-item="Legio Secundulus">Legio Secundulus</button>
+      <button class="subtab" data-item="Legio Tertiolus">Legio Tertiolus</button>
+      <button class="subtab" data-item="Legio Quartulus">Legio Quartulus</button>
+      <button class="subtab" data-item="Legio Quintulus">Legio Quintulus</button>
+      <button class="subtab" data-item="Legio Sextulus">Legio Sextulus</button>
+      </div>
+  
+      <div id="Liberation-of-Mazcab" class="tabcontent">
+        <h2>Liberation of Mazcab</h2>
+        <button class="subtab" data-item="Primeval mask">Primeval mask</button>
+      <button class="subtab" data-item="Primeval robe top">Primeval robe top</button>
+      <button class="subtab" data-item="Primeval robe legs">Primeval robe legs</button>
+      <button class="subtab" data-item="Primeval gloves">Primeval gloves</button>
+      <button class="subtab" data-item="Primeval boots">Primeval boots</button>
+      <button class="subtab" data-item="Tempest cowl">Tempest cowl</button>
+      <button class="subtab" data-item="Tempest body">Tempest body</button>
+      <button class="subtab" data-item="Tempest chaps">Tempest chaps</button>
+      <button class="subtab" data-item="Tempest gloves">Tempest gloves</button>
+      <button class="subtab" data-item="Tempest boots">Tempest boots</button>
+      <button class="subtab" data-item="Teralith helmet">Teralith helmet</button>
+      <button class="subtab" data-item="Teralith cuirass">Teralith cuirass</button>
+      <button class="subtab" data-item="Teralith leggings">Teralith leggings</button>
+      <button class="subtab" data-item="Teralith gauntlets">Teralith gauntlets</button>
+      <button class="subtab" data-item="Teralith boots">Teralith boots</button>
+      <button class="subtab" data-item="Achto Primeval mask">Achto Primeval mask</button>
+      <button class="subtab" data-item="Achto Primeval robe top">Achto Primeval robe top</button>
+      <button class="subtab" data-item="Achto Primeval robe legs">Achto Primeval robe legs</button>
+      <button class="subtab" data-item="Achto Primeval gloves">Achto Primeval gloves</button>
+      <button class="subtab" data-item="Achto Primeval boots">Achto Primeval boots</button>
+      <button class="subtab" data-item="Achto Tempest cowl">Achto Tempest cowl</button>
+      <button class="subtab" data-item="Achto Tempest body">Achto Tempest body</button>
+      <button class="subtab" data-item="Achto Tempest chaps">Achto Tempest chaps</button>
+      <button class="subtab" data-item="Achto Tempest gloves">Achto Tempest gloves</button>
+      <button class="subtab" data-item="Achto Tempest boots">Achto Tempest boots</button>
+      <button class="subtab" data-item="Achto Teralith helmet">Achto Teralith helmet</button>
+      <button class="subtab" data-item="Achto Teralith cuirass">Achto Teralith cuirass</button>
+      <button class="subtab" data-item="Achto Teralith leggings">Achto Teralith leggings</button>
+      <button class="subtab" data-item="Achto Teralith gauntlets">Achto Teralith gauntlets</button>
+      <button class="subtab" data-item="Achto Teralith boots">Achto Teralith boots</button>
+      <button class="subtab" data-item="Mazcab ability codex">Mazcab ability codex</button>
+      <button class="subtab" data-item="Lil' Tuzzy">Lil' Tuzzy</button>
+      <button class="subtab" data-item="Diddyzag">Diddyzag</button>
+      <button class="subtab" data-item="Yakaminu">Yakaminu</button>
+      </div>
+  
+      <div id="The-Magister" class="tabcontent">
+        <h2>The Magister</h2>
+        <button class="subtab" data-item="Phylactery">Phylactery</button>
+      <button class="subtab" data-item="Gloves of passage">Gloves of passage</button>
+      <button class="subtab" data-item="The Minister">The Minister</button>
+      <button class="subtab" data-item="The Magister's Journal 1">The Magister's Journal 1</button>
+      <button class="subtab" data-item="The Magister's Journal 2">The Magister's Journal 2</button>
+      <button class="subtab" data-item="The Magister's Journal 3">The Magister's Journal 3</button>
+      <button class="subtab" data-item="The Magister's Journal 4">The Magister's Journal 4</button>
+      <button class="subtab" data-item="The Magister's Journal 5">The Magister's Journal 5</button>
+      </div>
+  
+      <div id="Nex" class="tabcontent">
+        <h2>Nex</h2>
+        <button class="subtab" data-item="Torva full helm">Torva full helm</button>
+      <button class="subtab" data-item="Torva platebody">Torva platebody</button>
+      <button class="subtab" data-item="Torva platelegs">Torva platelegs</button>
+      <button class="subtab" data-item="Torva gloves">Torva gloves</button>
+      <button class="subtab" data-item="Torva boots">Torva boots</button>
+      <button class="subtab" data-item="Pernix cowl">Pernix cowl</button>
+      <button class="subtab" data-item="Pernix body">Pernix body</button>
+      <button class="subtab" data-item="Pernix chaps">Pernix chaps</button>
+      <button class="subtab" data-item="Pernix gloves">Pernix gloves</button>
+      <button class="subtab" data-item="Pernix boots">Pernix boots</button>
+      <button class="subtab" data-item="Zaryte bow">Zaryte bow</button>
+      <button class="subtab" data-item="Virtus mask">Virtus mask</button>
+      <button class="subtab" data-item="Virtus robe top">Virtus robe top</button>
+      <button class="subtab" data-item="Virtus robe legs">Virtus robe legs</button>
+      <button class="subtab" data-item="Virtus gloves">Virtus gloves</button>
+      <button class="subtab" data-item="Virtus boots">Virtus boots</button>
+      <button class="subtab" data-item="Virtus wand">Virtus wand</button>
+      <button class="subtab" data-item="Virtus book">Virtus book</button>
+      <button class="subtab" data-item="Ancient emblem">Ancient emblem</button>
+      <button class="subtab" data-item="Nex's Followers">Nex's Followers</button>
+      <button class="subtab" data-item="Nexterminator">Nexterminator</button>
+      </div>
+  
+      <div id="Nex---Angel-of-Death" class="tabcontent">
+        <h2>Nex - Angel of Death</h2>
+        <button class="subtab" data-item="Praesul codex">Praesul codex</button>
+      <button class="subtab" data-item="Wand of the praesul">Wand of the praesul</button>
+      <button class="subtab" data-item="Imperium core">Imperium core</button>
+      <button class="subtab" data-item="Reeves">Reeves</button>
+      <button class="subtab" data-item="The Praesul">The Praesul</button>
+      <button class="subtab" data-item="The Promised Gift">The Promised Gift</button>
+      <button class="subtab" data-item="Intricate shadow chest">Intricate shadow chest</button>
+      <button class="subtab" data-item="Intricate blood stained chest">Intricate blood stained chest</button>
+      <button class="subtab" data-item="Intricate ice chest">Intricate ice chest</button>
+      <button class="subtab" data-item="Intricate smoke-shrouded chest">Intricate smoke-shrouded chest</button>
+      </div>
+  
+      <div id="Queen-Black-Dragon" class="tabcontent">
+        <h2>Queen Black Dragon</h2>
+        <button class="subtab" data-item="Dragon kiteshield">Dragon kiteshield</button>
+      <button class="subtab" data-item="Royal bolt stabiliser">Royal bolt stabiliser</button>
+      <button class="subtab" data-item="Royal frame">Royal frame</button>
+      <button class="subtab" data-item="Royal sight">Royal sight</button>
+      <button class="subtab" data-item="Royal torsion spring">Royal torsion spring</button>
+      <button class="subtab" data-item="Draconic visage">Draconic visage</button>
+      <button class="subtab" data-item="Dragonbone upgrade kit">Dragonbone upgrade kit</button>
+      <button class="subtab" data-item="Queen Black Dragonling">Queen Black Dragonling</button>
+      <button class="subtab" data-item="First dragonkin journal">First dragonkin journal</button>
+      <button class="subtab" data-item="Second dragonkin journal">Second dragonkin journal</button>
+      <button class="subtab" data-item="Third dragonkin journal">Third dragonkin journal</button>
+      <button class="subtab" data-item="Fourth dragonkin journal">Fourth dragonkin journal</button>
+      </div>
+  
+      <div id="Raksha" class="tabcontent">
+        <h2>Raksha</h2>
+        <button class="subtab" data-item="Laceration boots">Laceration boots</button>
+      <button class="subtab" data-item="Blast diffusion boots">Blast diffusion boots</button>
+      <button class="subtab" data-item="Fleeting boots">Fleeting boots</button>
+      <button class="subtab" data-item="Shadow spike">Shadow spike</button>
+      <button class="subtab" data-item="Greater Ricochet ability codex">Greater Ricochet ability codex</button>
+      <button class="subtab" data-item="Greater Chain ability codex">Greater Chain ability codex</button>
+      <button class="subtab" data-item="Divert ability codex">Divert ability codex</button>
+      <button class="subtab" data-item="Raklette">Raklette</button>
+      </div>
+  
+      <div id="Rasial,-the-First-Necromancer" class="tabcontent">
+        <h2>Rasial, the First Necromancer</h2>
+        <button class="subtab" data-item="Omni guard">Omni guard</button>
+      <button class="subtab" data-item="Soulbound lantern">Soulbound lantern</button>
+      <button class="subtab" data-item="Crown of the First Necromancer">Crown of the First Necromancer</button>
+      <button class="subtab" data-item="Robe top of the First Necromancer">Robe top of the First Necromancer</button>
+      <button class="subtab" data-item="Robe bottom of the First Necromancer">Robe bottom of the First Necromancer</button>
+      <button class="subtab" data-item="Hand wrap of the First Necromancer">Hand wrap of the First Necromancer</button>
+      <button class="subtab" data-item="Foot wraps of the First Necromancer">Foot wraps of the First Necromancer</button>
+      <button class="subtab" data-item="Miso">Miso</button>
+      </div>
+  
+      <div id="Rex-Matriarchs" class="tabcontent">
+        <h2>Rex Matriarchs</h2>
+        <button class="subtab" data-item="Savage spear tip">Savage spear tip</button>
+      <button class="subtab" data-item="Savage spear shaft">Savage spear shaft</button>
+      <button class="subtab" data-item="Savage spear cap">Savage spear cap</button>
+      <button class="subtab" data-item="Savage plume">Savage plume</button>
+      <button class="subtab" data-item="Heart of the Archer">Heart of the Archer</button>
+      <button class="subtab" data-item="Heart of the Seer">Heart of the Seer</button>
+      <button class="subtab" data-item="Heart of the Warrior">Heart of the Warrior</button>
+      <button class="subtab" data-item="Heart of the Berserker">Heart of the Berserker</button>
+      <button class="subtab" data-item="Bagra">Bagra</button>
+      <button class="subtab" data-item="Corbi">Corbi</button>
+      <button class="subtab" data-item="Pavo">Pavo</button>
+      </div>
+  
+      <div id="The-Shadow-Reef" class="tabcontent">
+        <h2>The Shadow Reef</h2>
+        <button class="subtab" data-item="Eldritch crossbow limb">Eldritch crossbow limb</button>
+      <button class="subtab" data-item="Eldritch crossbow mechanism">Eldritch crossbow mechanism</button>
+      <button class="subtab" data-item="Eldritch crossbow stock">Eldritch crossbow stock</button>
+      <button class="subtab" data-item="Black stone heart">Black stone heart</button>
+      <button class="subtab" data-item="The Last Offering">The Last Offering</button>
+      <button class="subtab" data-item="Kranon's Ancient Journal">Kranon's Ancient Journal</button>
+      <button class="subtab" data-item="Ambi">Ambi</button>
+      </div>
+  
+      <div id="Solak" class="tabcontent">
+        <h2>Solak</h2>
+        <button class="subtab" data-item="Blightbound crossbow">Blightbound crossbow</button>
+      <button class="subtab" data-item="Off-hand Blightbound crossbow">Off-hand Blightbound crossbow</button>
+      <button class="subtab" data-item="Erethdor's grimoire (token)">Erethdor's grimoire (token)</button>
+      <button class="subtab" data-item="Purple mushroom">Purple mushroom</button>
+      <button class="subtab" data-item="Merethiel's stave">Merethiel's stave</button>
+      <button class="subtab" data-item="Solly">Solly</button>
+      <button class="subtab" data-item="Perdita">Perdita</button>
+      <button class="subtab" data-item="Torn grimoire page">Torn grimoire page</button>
+      </div>
+  
+      <div id="Telos" class="tabcontent">
+        <h2>Telos</h2>
+        <button class="subtab" data-item="Orb of corrupted anima">Orb of corrupted anima</button>
+      <button class="subtab" data-item="Orb of volcanic anima">Orb of volcanic anima</button>
+      <button class="subtab" data-item="Orb of pure anima">Orb of pure anima</button>
+      <button class="subtab" data-item="Dormant Seren godbow">Dormant Seren godbow</button>
+      <button class="subtab" data-item="Dormant staff of Sliske">Dormant staff of Sliske</button>
+      <button class="subtab" data-item="Dormant Zaros godsword">Dormant Zaros godsword</button>
+      <button class="subtab" data-item="Reprisal ability codex">Reprisal ability codex</button>
+      <button class="subtab" data-item="Tess">Tess</button>
+      </div>
+  
+      <div id="Temple-of-Aminishi" class="tabcontent">
+        <h2>Temple of Aminishi</h2>
+        <button class="subtab" data-item="Fishy treat">Fishy treat</button>
+      <button class="subtab" data-item="Crassian Allegiance">Crassian Allegiance</button>
+      <button class="subtab" data-item="Masuta's warspear">Masuta's warspear</button>
+      <button class="subtab" data-item="Himiko's Vision">Himiko's Vision</button>
+      <button class="subtab" data-item="Ancient scale">Ancient scale</button>
+      <button class="subtab" data-item="Kuroryu">Kuroryu</button>
+      </div>
+  
+      <div id="The-Twin-Furies" class="tabcontent">
+        <h2>The Twin Furies</h2>
+        <button class="subtab" data-item="Crest of Zamorak">Crest of Zamorak</button>
+      <button class="subtab" data-item="Dormant anima core helm">Dormant anima core helm</button>
+      <button class="subtab" data-item="Dormant anima core body">Dormant anima core body</button>
+      <button class="subtab" data-item="Dormant anima core legs">Dormant anima core legs</button>
+      <button class="subtab" data-item="Zamorakian essence">Zamorakian essence</button>
+      <button class="subtab" data-item="Blade of Nymora">Blade of Nymora</button>
+      <button class="subtab" data-item="Blade of Avaryss">Blade of Avaryss</button>
+      <button class="subtab" data-item="Nylessa">Nylessa</button>
+      <button class="subtab" data-item="Ava">Ava</button>
+      </div>
+  
+      <div id="TzHaar" class="tabcontent">
+        <h2>TzHaar</h2>
+        <button class="subtab" data-item="Fire cape">Fire cape</button>
+      <button class="subtab" data-item="TokHaar-Kal-Ket">TokHaar-Kal-Ket</button>
+      <button class="subtab" data-item="TokHaar-Kal-Mej">TokHaar-Kal-Mej</button>
+      <button class="subtab" data-item="TokHaar-Kal-Xil">TokHaar-Kal-Xil</button>
+      <button class="subtab" data-item="TokHaar-Kal-Mor">TokHaar-Kal-Mor</button>
+      <button class="subtab" data-item="Shrimpy">Shrimpy</button>
+      </div>
+  
+      <div id="TzKal-Zuk" class="tabcontent">
+        <h2>TzKal-Zuk</h2>
+        <button class="subtab" data-item="Obsidian blade">Obsidian blade</button>
+      <button class="subtab" data-item="Magma core">Magma core</button>
+      <button class="subtab" data-item="Ancient hilt">Ancient hilt</button>
+      <button class="subtab" data-item="Igneous stone">Igneous stone</button>
+      <button class="subtab" data-item="Magma Tempest ability codex">Magma Tempest ability codex</button>
+      <button class="subtab" data-item="Scripture of Ful">Scripture of Ful</button>
+      <button class="subtab" data-item="Little Zuk">Little Zuk</button>
+      <button class="subtab" data-item="Molten Little Zuk">Molten Little Zuk</button>
+      </div>
+  
+      <div id="TzTok-Jad-and-Har-Aken" class="tabcontent">
+        <h2>TzTok-Jad and Har-Aken</h2>
+        <button class="subtab" data-item="Fire cape">Fire cape</button>
+      <button class="subtab" data-item="TokHaar-Kal-Ket">TokHaar-Kal-Ket</button>
+      <button class="subtab" data-item="TokHaar-Kal-Mej">TokHaar-Kal-Mej</button>
+      <button class="subtab" data-item="TokHaar-Kal-Xil">TokHaar-Kal-Xil</button>
+      <button class="subtab" data-item="Shrimpy">Shrimpy</button>
+      </div>
+  
+      <div id="Vindicta-&-Gorvek" class="tabcontent">
+        <h2>Vindicta & Gorvek</h2>
+        <button class="subtab" data-item="Crest of Zaros">Crest of Zaros</button>
+      <button class="subtab" data-item="Dormant anima core helm">Dormant anima core helm</button>
+      <button class="subtab" data-item="Dormant anima core body">Dormant anima core body</button>
+      <button class="subtab" data-item="Dormant anima core legs">Dormant anima core legs</button>
+      <button class="subtab" data-item="Zarosian essence">Zarosian essence</button>
+      <button class="subtab" data-item="Dragon Rider lance">Dragon Rider lance</button>
+      <button class="subtab" data-item="Rawrvek">Rawrvek</button>
+      <button class="subtab" data-item="Vindiddy">Vindiddy</button>
+      </div>
+  
+      <div id="Vorago" class="tabcontent">
+        <h2>Vorago</h2>
+        <button class="subtab" data-item="Seismic wand">Seismic wand</button>
+      <button class="subtab" data-item="Seismic singularity">Seismic singularity</button>
+      <button class="subtab" data-item="Tectonic energy">Tectonic energy</button>
+      <button class="subtab" data-item="Omens helm">Omens helm</button>
+      <button class="subtab" data-item="Omens torso">Omens torso</button>
+      <button class="subtab" data-item="Omens legs">Omens legs</button>
+      <button class="subtab" data-item="Omens gloves">Omens gloves</button>
+      <button class="subtab" data-item="Omens feet">Omens feet</button>
+      <button class="subtab" data-item="Maul of omens">Maul of omens</button>
+      <button class="subtab" data-item="Vitalis">Vitalis</button>
+      <button class="subtab" data-item="Bombi">Bombi</button>
+      </div>
+  
+      <div id="Zamorak,-Lord-of-Chaos" class="tabcontent">
+        <h2>Zamorak, Lord of Chaos</h2>
+        <button class="subtab" data-item="Chaos Roar ability codex">Chaos Roar ability codex</button>
+      <button class="subtab" data-item="Top of the Last Guardian's bow">Top of the Last Guardian's bow</button>
+      <button class="subtab" data-item="Divine bowstring">Divine bowstring</button>
+      <button class="subtab" data-item="Bottom of the Last Guardian's bow">Bottom of the Last Guardian's bow</button>
+      <button class="subtab" data-item="Vestments of havoc robe top">Vestments of havoc robe top</button>
+      <button class="subtab" data-item="Vestments of havoc robe bottom">Vestments of havoc robe bottom</button>
+      <button class="subtab" data-item="Vestments of havoc hood">Vestments of havoc hood</button>
+      <button class="subtab" data-item="Vestments of havoc boots">Vestments of havoc boots</button>
+      <button class="subtab" data-item="Codex of lost knowledge">Codex of lost knowledge</button>
+      <button class="subtab" data-item="Jewels of Zamorak">Jewels of Zamorak</button>
+      <button class="subtab" data-item="Chaos Demon Overide">Chaos Demon Overide</button>
+      </div>
+  
+      <div id="Zemouregal-&-Vorkath" class="tabcontent">
+        <h2>Zemouregal & Vorkath</h2>
+        <button class="subtab" data-item="Vorkath's spike">Vorkath's spike</button>
+      <button class="subtab" data-item="Vorkath's scale">Vorkath's scale</button>
+      <button class="subtab" data-item="Invoke Lord of Bones incantation codex">Invoke Lord of Bones incantation codex</button>
+      <button class="subtab" data-item="Zemouregal's nexus">Zemouregal's nexus</button>
+      <button class="subtab" data-item="Vorki">Vorki</button>
+      </div>
+  
+      <div id="Sanctum-of-Rebirth" class="tabcontent">
+        <h2>Sanctum of Rebirth</h2>
+        <button class="subtab" data-item="Roar of Awakening">Roar of Awakening</button>
+      <button class="subtab" data-item="Ode to Deceit">Ode to Deceit</button>
+      <button class="subtab" data-item="Shard of Genesis Essence">Shard of Genesis Essence</button>
+      <button class="subtab" data-item="Scripture of Amascut">Scripture of Amascut</button>
+      <button class="subtab" data-item="Divine Rage prayer Codex">Divine Rage prayer Codex</button>
+      <button class="subtab" data-item="The Brood Mother">The Brood Mother</button>
+      <button class="subtab" data-item="The Beast of Darkness">The Beast of Darkness</button>
+      <button class="subtab" data-item="Death and Devourers">Death and Devourers</button>
+      <button class="subtab" data-item="Neffie">Neffie</button>
+      </div>
+  
+      <div id="The-Gate-of-Elidinis" class="tabcontent">
+        <h2>The Gate of Elidinis</h2>
+        <button class="subtab" data-item="Runic attuner">Runic attuner</button>
+      <button class="subtab" data-item="Memory dowser">Memory dowser</button>
+      <button class="subtab" data-item="Scripture of Elidinis">Scripture of Elidinis</button>
+      <button class="subtab" data-item="Latent Offering">Latent Offering</button>
+      <button class="subtab" data-item="After the Flood">After the Flood</button>
+      <button class="subtab" data-item="Eclipsed Soul prayer codex">Eclipsed Soul prayer codex</button>
+      <button class="subtab" data-item="Edie">Edie</button>
+      </div>
+</body>
+</html>

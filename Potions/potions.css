@@ -1,0 +1,79 @@
+/* The grid container */
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Set columns widths */
+    grid-template-areas:
+        'sidenav search search'
+        'sidenav content content';
+    grid-column-gap: 0px; /* If you want gap between the columns */
+    background-color: #0a0a0a;
+}
+
+.sidenav,
+.search,
+.content {
+    padding: 10px;
+}
+
+/* Style the side navigation */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #4e2f40;
+    overflow-x: hidden;
+}
+
+/* Side navigation links */
+.sidenav a {
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Style the tab */
+.search {
+    position: fixed;
+    width:850px;
+    padding-left: 210px;
+    height: 200px;
+    background-color: #8fafc2;
+}
+
+/* Style the content */
+.content {
+    grid-area: content;
+    height: 100%;
+    padding-top: 210px;
+    width: 850px;
+    grid-column: 2;
+    background-color: aqua;
+}
+
+/* Additional styles (optional) */
+.search input {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+#result {
+    margin-top: 20px;
+    background-color: aqua;
+}
+
+.custom-hr {
+    border-color: #0c0a0a; /* change for color of horizontal line */
+}
