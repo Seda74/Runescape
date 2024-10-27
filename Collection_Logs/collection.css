@@ -1,6 +1,6 @@
 /* Style the side navigation */
 .sidenav {
-    height: 100%;
+    height: 500px;
     width: 200px;
     position: fixed;
     z-index: 1;
